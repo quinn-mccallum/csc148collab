@@ -44,10 +44,15 @@ class Question:
 
     id: int
     text: str
+    # TODO: Make sure this is a proper abstract type for all parts
 
     def __init__(self, id_: int, text: str) -> None:
-        """ Initialize a question with the text <text> """
-        # TODO: complete the body of this method
+        """ Initialize a question with the text <text>
+        Precondition: text is not the empty string
+        """
+        self.id = id_
+        self.text = text
+
 
     def __str__(self) -> str:
         """
@@ -75,20 +80,24 @@ class Question:
         raise NotImplementedError
 
 
-class MultipleChoiceQuestion:
+class MultipleChoiceQuestion(Question):
     # TODO: make this a child class of another class defined in this file
     """ A question whose answers can be one of several options
 
     === Public Attributes ===
     id: the id of this question
     text: the text of this question
+    _options: a list of the possible (text) options for this question
 
     === Representation Invariants ===
     text is not the empty string
+    No two elements in options are the same string
+    Options contains at least two elements
     """
 
     id: int
     text: str
+    _options: List[str]
 
     def __init__(self, id_: int, text: str, options: List[str]) -> None:
         """
@@ -98,8 +107,12 @@ class MultipleChoiceQuestion:
         === Precondition ===
         No two elements in <options> are the same string
         <options> contains at least two elements
+        Text is not the empty string
         """
-        # TODO: complete the body of this method
+        Question.__init__(self, id_, text)
+        self._options = []
+
+        self._options.extend(options)
 
     def __str__(self) -> str:
         """
@@ -108,7 +121,16 @@ class MultipleChoiceQuestion:
 
         You can choose the precise format of this string.
         """
-        # TODO: complete the body of this method
+        return_str = "Q[{}]: {} ".format(self.id, self.text)
+
+        i = 1
+        for option in self._options:
+            if i != 1:
+                return_str += ", "
+            return_str += "Opt " + str(i) + ": " + option
+            i += 1
+
+        return return_str
 
     def validate_answer(self, answer: Answer) -> bool:
         """
@@ -117,7 +139,9 @@ class MultipleChoiceQuestion:
         An answer is valid if its content is one of the possible answers to this
         question.
         """
-        # TODO: complete the body of this method
+        to_check = answer.content
+
+        return to_check in self._options
 
     def get_similarity(self, answer1: Answer, answer2: Answer) -> float:
         """
@@ -127,10 +151,13 @@ class MultipleChoiceQuestion:
         === Precondition ===
         <answer1> and <answer2> are both valid answers to this question.
         """
-        # TODO: complete the body of this method
+        if answer1.content == answer2.content:
+            return 1.0
+        else:
+            return 0.0
 
 
-class NumericQuestion:
+class NumericQuestion(MultipleChoiceQuestion):
     # TODO: make this a child class of another class defined in this file
     """ A question whose answer can be an integer between some
     minimum and maximum value (inclusive).
@@ -138,6 +165,7 @@ class NumericQuestion:
     === Public Attributes ===
     id: the id of this question
     text: the text of this question
+    _options: upper and lower bounds of possible answer, saved as str
 
     === Representation Invariants ===
     text is not the empty string
@@ -145,6 +173,7 @@ class NumericQuestion:
 
     id: int
     text: str
+    _options: List(str)
 
     def __init__(self, id_: int, text: str, min_: int, max_: int) -> None:
         """
@@ -154,23 +183,21 @@ class NumericQuestion:
         === Precondition ===
         min_ < max_
         """
-        # TODO: complete the body of this method
+        MultipleChoiceQuestion.__init__(self, id_, text, [str(min_), str(max_)])
 
-    def __str__(self) -> str:
-        """
-        Return a string representation of this question including the
-        text of the question and a description of the possible answers.
-
-        You can choose the precise format of this string.
-        """
-        # TODO: complete the body of this method
+    # __str__ to be inherited
 
     def validate_answer(self, answer: Answer) -> bool:
         """
         Return True iff the content of <answer> is an integer between the
         minimum and maximum (inclusive) possible answers to this question.
         """
-        # TODO: complete the body of this method
+        to_check = answer.content
+
+        if not isinstance(to_check, int):
+            return False
+
+        return int(self._option[0]) <= to_check <= int(self._options[1])
 
     def get_similarity(self, answer1: Answer, answer2: Answer) -> float:
         """
@@ -196,10 +223,14 @@ class NumericQuestion:
         === Precondition ===
         <answer1> and <answer2> are both valid answers to this question
         """
-        # TODO: complete the body of this method
+        step_1 = abs(answer1.content - answer2.content)
+        step_2 = step_1 / (int(self._options[1])-int(self._options[0]))
+        similarity = 1.0 - step_2
+
+        return similarity
 
 
-class YesNoQuestion:
+class YesNoQuestion(MultipleChoiceQuestion):
     # TODO: make this a child class of another class defined in this file
     """ A question whose answer is either yes (represented by True) or
     no (represented by False).
@@ -218,22 +249,17 @@ class YesNoQuestion:
         """
         Initialize a question with the text <text> and id <id>.
         """
-        # TODO: complete the body of this method
+        Question.__init__(self, id_, text)
 
-    def __str__(self) -> str:
-        """
-        Return a string representation of this question including the
-        text of the question and a description of the possible answers.
-
-        You can choose the precise format of this string.
-        """
-        # TODO: complete the body of this method
+    # __str__ to be inherited
 
     def validate_answer(self, answer: Answer) -> bool:
         """
         Return True iff <answer>'s content is a boolean.
         """
-        # TODO: complete the body of this method
+        to_check = answer.content
+
+        return isinstance(to_check, bool)
 
     def get_similarity(self, answer1: Answer, answer2: Answer) -> float:
         """
@@ -243,16 +269,20 @@ class YesNoQuestion:
         === Precondition ===
         <answer1> and <answer2> are both valid answers to this question
         """
-        # TODO: complete the body of this method
+        if answer1.content == answer2.content:
+            return 1.0
+        else:
+            return 0.0
 
 
-class CheckboxQuestion:
+class CheckboxQuestion(MultipleChoiceQuestion):
     # TODO: make this a child class of another class defined in this file
     """ A question whose answers can be one or more of several options
 
     === Public Attributes ===
     id: the id of this question
     text: the text of this question
+    _options: Possible options, as text
 
     === Representation Invariants ===
     text is not the empty string
@@ -260,26 +290,11 @@ class CheckboxQuestion:
 
     id: int
     text: str
+    _options: List[str]
 
-    def __init__(self, id_: int, text: str, options: List[str]) -> None:
-        """
-        Initialize a question with the text <text> and id <id> and
-        possible answers <options>.
+    # __init__ to be inherited
 
-        === Precondition ===
-        No two elements in <options> are the same string
-        <options> contains at least two elements
-        """
-        # TODO: complete the body of this method
-
-    def __str__(self) -> str:
-        """
-        Return a string representation of this question including the
-        text of the question and a description of the possible answers.
-
-        You can choose the precise format of this string.
-        """
-        # TODO: complete the body of this method
+    # __str__ to be inherited
 
     def validate_answer(self, answer: Answer) -> bool:
         """
@@ -288,7 +303,26 @@ class CheckboxQuestion:
         An answer is valid iff its content is a non-empty list containing
         unique possible answers to this question.
         """
-        # TODO: complete the body of this method
+        to_check = answer.content
+
+        # Check if the answer content is a list
+        if not isinstance(to_check, List):
+            return False
+
+        # Check if the list is not empty
+        if len(to_check) == 0:
+            return False
+
+        # Check if the content is unique
+        if len(to_check) != len(set(to_check)):
+            return False
+
+        # Check if all answers possible
+        for possible_answer in to_check:
+            if possible_answer not in self._options:
+                return False
+
+        return True
 
     def get_similarity(self, answer1: Answer, answer2: Answer) -> float:
         """
@@ -300,14 +334,23 @@ class CheckboxQuestion:
         <answer2>.content
 
         For example, if <answer1>.content == ['a', 'b', 'c'] and
-        <answer1>.content == ['c', 'b', 'd'], the strings that are common to
+        <answer2>.content == ['c', 'b', 'd'], the strings that are common to
         both are ['c', 'b'] and the unique strings that appear in both are
         ['a', 'b', 'c', 'd'].
 
         === Precondition ===
         <answer1> and <answer2> are both valid answers to this question
         """
-        # TODO: complete the body of this method
+        num_same = 0
+        num_unique = 0
+
+        size_1 = len(answer1.content)
+        size_2 = len(answer2.content)
+        size_common = len(set(answer1.content + answer2.content))
+
+        similarity = size_common / (size_1 + size_2)
+
+        return similarity
 
 
 class Answer:
@@ -320,12 +363,17 @@ class Answer:
 
     def __init__(self,
                  content: Union[str, bool, int, List[Union[str]]]) -> None:
-        """Initialize an answer with content <content>"""
-        # TODO: complete the body of this method
+        """Initialize an answer with content <content>
+        new_answer = Answer("Apple")
+        new_answer = Answer(True)
+
+        """
+        # TODO: this seemed too easy
+        self.content = content
 
     def is_valid(self, question: Question) -> bool:
         """Return True iff self.content is a valid answer to <question>"""
-        # TODO: complete the body of this method
+        return question.validate_answer(self)
 
 
 class Survey:

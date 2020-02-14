@@ -49,7 +49,29 @@ def slice_list(lst: List[Any], n: int) -> List[List[Any]]:
     >>> slice_list(['a', 1, 6.0, False], 3) == [['a', 1, 6.0], [False]]
     True
     """
-    # TODO: complete the body of this function
+    copy_lst = lst[:]
+    new_slice = []
+    return_list = []
+
+    for _ in copy_lst:
+        # Add first item from copy_lst to new_slice
+        new_slice.append(copy_lst.pop(0))
+
+        # If we have built up the temp slice to the correct length
+        if len(new_slice) == n:
+            # Append new
+            return_list.append(new_slice)
+            # Reset new_slice
+            new_slice = []
+
+    # If there are remaining not- sliced elements
+    if len(new_slice) != 0:
+        return_list.append(new_slice)
+
+    return return_list
+
+
+
 
 
 def windows(lst: List[Any], n: int) -> List[List[Any]]:
@@ -66,7 +88,36 @@ def windows(lst: List[Any], n: int) -> List[List[Any]]:
     >>> windows(['a', 1, 6.0, False], 3) == [['a', 1, 6.0], [1, 6.0, False]]
     True
     """
-    # TODO: complete the body of this function
+
+    new = []
+    temp = []
+
+    # loop through lst,
+    # range is the length of the list +1 minus n so the range doesn't overshoot
+    for i in range(len(lst) + 1 - n):
+
+        # a new loop with a range of n, starting at i
+        for j in range(i, i + n):
+
+            # check if j is in range of lst so we don't error out
+            if j in range(len(lst)):
+
+                # append the lst item at j to a temporary list <temp>
+                temp.append(lst[j])
+
+                # if temp contains <n> items
+                if len(temp) == n:
+
+                    # append the temporary (inner) list to the main list <new>
+                    new.append(temp)
+
+                    # reset temp to empty
+                    temp = []
+
+    return new
+
+
+
 
 
 class Grouper:
@@ -90,7 +141,7 @@ class Grouper:
         === Precondition ===
         group_size > 1
         """
-        # TODO: complete the body of this method
+        self.group_size = group_size
 
     def make_grouping(self, course: Course, survey: Survey) -> Grouping:
         """ Return a grouping for all students in <course> using the questions
@@ -261,18 +312,23 @@ class Group:
 
     def __init__(self, members: List[Student]) -> None:
         """ Initialize a group with members <members> """
-        # TODO: complete the body of this method
+        self._members = []
+        self._members.extend(members)
 
     def __len__(self) -> int:
         """ Return the number of members in this group """
-        # TODO: complete the body of this method
+        return len(self._members)
 
     def __contains__(self, member: Student) -> bool:
         """
         Return True iff this group contains a member with the same id
         as <member>.
         """
-        # TODO: complete the body of this method
+        for existing_member in self.members:
+            if existing_member.id == member.id:
+                return True
+
+        return False
 
     def __str__(self) -> str:
         """
@@ -281,14 +337,27 @@ class Group:
 
         You can choose the precise format of this string.
         """
-        # TODO: complete the body of this method
+        return_str = "Members: "
+
+        count = 0
+        for member in self._members:
+            if count != 0:
+                return_str += ", "
+            return_str += member.name
+            count += 1
+
+        return return_str
 
     def get_members(self) -> List[Student]:
         """ Return a list of members in this group. This list should be a
         shallow copy of the self._members attribute.
         """
-        # TODO: complete the body of this method
+        shallow_copy = []
 
+        for student in self._members:
+            shallow_copy.append(student)
+
+        return shallow_copy
 
 class Grouping:
     """
@@ -306,11 +375,11 @@ class Grouping:
 
     def __init__(self) -> None:
         """ Initialize a Grouping that contains zero groups """
-        # TODO: complete the body of this method
+        self._groups = []
 
     def __len__(self) -> int:
         """ Return the number of groups in this grouping """
-        # TODO: complete the body of this method
+        return len(self._groups)
 
     def __str__(self) -> str:
         """
@@ -320,7 +389,17 @@ class Grouping:
 
         You can choose the precise format of this string.
         """
-        # TODO: complete the body of this method
+        return_str = ""
+
+        i = 0
+        for group in self._groups:
+
+            # If this isn't the first line, add a new line character
+            if i != 0:
+                return_str += "\n"
+            return_str += group
+
+        return return_str
 
     def add_group(self, group: Group) -> bool:
         """
@@ -329,14 +408,38 @@ class Grouping:
         Iff adding <group> to this grouping would violate a representation
         invariant don't add it and return False instead.
         """
-        # TODO: complete the body of this method
+        # Check representation invariants:
+        # Make sure group is not empty
+        if len(group) == 0:
+            return False
+
+        # Make sure no duplicate students
+        # for every possible student to be added
+        for potential_student in group.get_members():
+            # for every current group
+            for existing_group in self._groups:
+                # for every student in the given current group
+                for existing_student in existing_group.get_members():
+                    # if the students have the same id
+                    if potential_student.id == existing_student.id:
+                        return False
+
+        # no problems, we can add the group
+        self._groups.append(group)
+        return True
+
+
 
     def get_groups(self) -> List[Group]:
-        """ Return a list of all groups in this grouping. 
-        This list should be a shallow copy of the self._groups 
+        """ Return a list of all groups in this grouping.
+        This list should be a shallow copy of the self._groups
         attribute.
         """
-        # TODO: complete the body of this method
+        groups_copy = []
+        for group in self._groups:
+            groups_copy.append(group)
+
+        return True
 
 
 if __name__ == '__main__':

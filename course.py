@@ -62,12 +62,15 @@ class Student:
     name: str
 
     def __init__(self, id_: int, name: str) -> None:
-        """ Initialize a student with name <name> and id <id>"""
-        # TODO: complete the body of this method
+        """ Initialize a student with name <name> and id <id>
+        Representation Invariant: name is not empty string"""
+        self.id = id_
+        self.name = name
+
 
     def __str__(self) -> str:
         """ Return the name of this student """
-        # TODO: complete the body of this method
+        return self.name
 
     def has_answer(self, question: Question) -> bool:
         """
@@ -110,7 +113,8 @@ class Course:
         """
         Initialize a course with the name of <name>.
         """
-        # TODO: complete the body of this method
+        self.name = name
+        self.students = []
 
     def enroll_students(self, students: List[Student]) -> None:
         """
@@ -119,7 +123,25 @@ class Course:
         If adding any student would violate a representation invariant,
         do not add any of the students in <students> to the course.
         """
-        # TODO: complete the body of this method
+        # TODO: What about aliasing...?
+        # TODO: Add testing for this: normal, duplicate, empty, ...
+
+        # check representation invariants
+        duplicate_students = False
+
+        # for every possible student,
+        for possible_student in students:
+
+            # for every existing student,
+            for existing_student in self.students:
+
+                # check if their id's are the same
+                if possible_student.id == existing_student.id:
+                    duplicate_students = True
+
+        # add students
+        if duplicate_students is False:
+            self.students.extend(students)
 
     def all_answered(self, survey: Survey) -> bool:
         """

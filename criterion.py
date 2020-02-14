@@ -10,7 +10,7 @@ Copying for purposes other than this use is expressly prohibited.
 All forms of distribution of this code, whether as given or with
 any changes, are expressly prohibited.
 
-Authors: Misha Schwartz, Mario Badr, Christine Murad, Diane Horton, 
+Authors: Misha Schwartz, Mario Badr, Christine Murad, Diane Horton,
 Sophia Huynh and Jaisie Sin
 
 All of the files in this directory and all subdirectories are:
@@ -32,7 +32,7 @@ class InvalidAnswerError(Exception):
     """
     Error that should be raised when an answer is invalid for a given question.
     """
-
+    # TODO add something here?
 
 class Criterion:
     """
@@ -54,8 +54,7 @@ class Criterion:
         raise NotImplementedError
 
 
-class HomogeneousCriterion:
-    # TODO: make this a child class of another class defined in this file
+class HomogeneousCriterion(Criterion):
     """
     A criterion used to evaluate the quality of a group based on the group
     members' answers for a given question.
@@ -71,6 +70,8 @@ class HomogeneousCriterion:
         This score is calculated by finding the similarity of every
         combination of two answers in <answers> and taking the average of all
         of these similarity scores.
+        # TODO Do we count answer pairs of the same answer with itself? would
+        # this make a difference?
 
         If there is only one answer in <answers> and it is valid return 1.0
         since a single answer is always identical to itself.
@@ -81,10 +82,33 @@ class HomogeneousCriterion:
         === Precondition ===
         len(answers) > 0
         """
-        # TODO: complete the body of this method
+        # Single answer case
+        if len(answers == 1):
+            if answers[0].is_valid(question):
+                return 1.0
+            else:
+                raise InvalidAnswerError
+
+        # Check if any answers are not valid
+        for answer in answers:
+            if not answer.is_valid(question):
+                raise InvalidAnswerError
+
+        # Multiple answers case
+        comparison_count = 0
+        total_similarity = 0
+        for i1 in range(len(answers)):
+            for i2 in range(len(answers)):
+                if i1 != i2:
+                    comparison_count += 1
+                    total_similarity += question.get_similarity(answers[1],
+                                                                answers[2])
+        return total_similarity/ comparison_count
 
 
-class HeterogeneousCriterion:
+
+
+class HeterogeneousCriterion(HomogeneousCriterion):
     # TODO: make this a child class of another class defined in this file
     """ A criterion used to evaluate the quality of a group based on the group
     members' answers for a given question.
@@ -110,15 +134,16 @@ class HeterogeneousCriterion:
         === Precondition ===
         len(answers) > 0
         """
-        # TODO: complete the body of this method
-
+        similarity = HomogeneousCriterion.score_answers(self, question, answers)
+        return 1 - similarity
 
 class LonelyMemberCriterion:
     # TODO: make this a child class of another class defined in this file
     """ A criterion used to measure the quality of a group of students
-    according to the group members' answers to a question. This criterion
-    assumes that a group is of high quality if no member of the group gives
-    a unique answer to a question.
+    according to the group members' answers to a question.
+
+    This criterion assumes that a group is of high quality if no member of the
+    group gives a unique answer to a question.
     """
 
     def score_answers(self, question: Question, answers: List[Answer]) -> float:
@@ -138,7 +163,19 @@ class LonelyMemberCriterion:
         === Precondition ===
         len(answers) > 0
         """
-        # TODO: complete the body of this method
+        unique_list = []
+        answers_copy = answers[:]
+        for answer in answers:
+            if answer not in unique_list:
+                answers_copy.remove(answer)
+                unique_list.append(answer)
+
+        for answer in unique_list:
+            if answer not in answers_copy:
+                return False
+
+        return True
+
 
 
 if __name__ == '__main__':
