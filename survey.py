@@ -197,7 +197,7 @@ class NumericQuestion(MultipleChoiceQuestion):
         if not isinstance(to_check, int):
             return False
 
-        return int(self._option[0]) <= to_check <= int(self._options[1])
+        return int(self._options[0]) <= to_check <= int(self._options[1])
 
     def get_similarity(self, answer1: Answer, answer2: Answer) -> float:
         """
@@ -238,6 +238,7 @@ class YesNoQuestion(MultipleChoiceQuestion):
     === Public Attributes ===
     id: the id of this question
     text: the text of this question
+    _options: str version of True, False
 
     === Representation Invariants ===
     text is not the empty string
@@ -245,13 +246,24 @@ class YesNoQuestion(MultipleChoiceQuestion):
     id: int
     text: str
 
-    def __init__(self, id_: int, text: str) -> None:
+    def __init__(self, id_: int, text: str) -> None:  # TODO fix this warning
         """
         Initialize a question with the text <text> and id <id>.
         """
-        Question.__init__(self, id_, text)
+        self.id = id_
+        self.text = text
 
-    # __str__ to be inherited
+    def __str__(self) -> str:
+        """
+        Return a string representation of this question including the
+        text of the question and a description of the possible answers.
+
+        You can choose the precise format of this string.
+        """
+        # possible answers
+        p_a = "Opt 1: True, Opt 2: False"
+
+        return("Q[{}]: {}  {}".format(self.id, self.text, p_a))
 
     def validate_answer(self, answer: Answer) -> bool:
         """
@@ -341,14 +353,17 @@ class CheckboxQuestion(MultipleChoiceQuestion):
         === Precondition ===
         <answer1> and <answer2> are both valid answers to this question
         """
-        num_same = 0
-        num_unique = 0
 
-        size_1 = len(answer1.content)
-        size_2 = len(answer2.content)
-        size_common = len(set(answer1.content + answer2.content))
+        common_answers = []
 
-        similarity = size_common / (size_1 + size_2)
+        for a1 in answer1.content:
+            for a2 in answer2.content:
+                if a1 == a2 and a1 not in common_answers:
+                    common_answers.append(a1)
+
+        size_unique = len(set(answer1.content + answer2.content))
+
+        similarity = len(common_answers) / size_unique
 
         return similarity
 
@@ -413,18 +428,26 @@ class Survey:
         This new survey should use a HomogeneousCriterion as a default criterion
         and should use 1 as a default weight.
         """
-        # TODO: complete the body of this method
+        self._questions = {}
+        self._criteria = {}
+        self._weights = {}
+        self._default_criterion = HomogeneousCriterion()
+        self._default_weight = 1
+
+        for q in questions:
+            if q.id not in self._questions:
+                self._questions[q.id] = q
 
     def __len__(self) -> int:
         """ Return the number of questions in this survey """
-        # TODO: complete the body of this method
+        return len(self._questions)
 
     def __contains__(self, question: Question) -> bool:
         """
         Return True iff there is a question in this survey with the same
         id as <question>.
         """
-        # TODO: complete the body of this method
+        return question.id in self._questions
 
     def __str__(self) -> str:
         """
@@ -433,11 +456,25 @@ class Survey:
 
         You can choose the precise format of this string.
         """
-        # TODO: complete the body of this method
+        return_str = ""
+        first_question = True
+
+        for question in self._questions:
+            if not first_question:
+                return_str += ', '
+
+            return_str += str(question)
+            first_question = False
+
+        return return_str
 
     def get_questions(self) -> List[Question]:
         """ Return a list of all questions in this survey """
-        # TODO: complete the body of this method
+        qlist = []
+        for q in self._questions:
+            qlist.append(self._questions[q])
+
+        return qlist
 
     def _get_criterion(self, question: Question) -> Criterion:
         """
@@ -449,7 +486,13 @@ class Survey:
         === Precondition ===
         <question>.id occurs in this survey
         """
-        # TODO: complete the body of this method
+        # check if question not in criteria
+        if question.id not in self._criteria:
+            return self._default_criterion
+
+        # otherwise return
+        else:
+            return self._criteria[question.id]
 
     def _get_weight(self, question: Question) -> int:
         """
@@ -461,7 +504,12 @@ class Survey:
         === Precondition ===
         <question>.id occurs in this survey
         """
-        # TODO: complete the body of this method
+        # Check if question has a custom weight
+        if question.id in self._weights:
+            return self._weights[question.id]
+        # Return the default weight
+        else:
+            return self._default_weight
 
     def set_weight(self, weight: int, question: Question) -> bool:
         """
@@ -470,7 +518,13 @@ class Survey:
         If <question>.id does not occur in this survey, do not set the <weight>
         and return False instead.
         """
-        # TODO: complete the body of this method
+        # Check if question exists
+        if question.id not in self._questions:
+            return False
+
+        # Set the weight
+        self._weights[question.id] = weight
+        return True
 
     def set_criterion(self, criterion: Criterion, question: Question) -> bool:
         """
@@ -480,7 +534,11 @@ class Survey:
         If <question>.id does not occur in this survey, do not set the <weight>
         and return False instead.
         """
-        # TODO: complete the body of this method
+        if question.id not in self._questions:
+            return False
+        else:
+            self._criteria[question.id] = criterion
+            return True
 
     def score_students(self, students: List[Student]) -> float:
         """

@@ -312,6 +312,7 @@ class Group:
 
     def __init__(self, members: List[Student]) -> None:
         """ Initialize a group with members <members> """
+        # TODO Check for duplicates
         self._members = []
         self._members.extend(members)
 
@@ -324,7 +325,7 @@ class Group:
         Return True iff this group contains a member with the same id
         as <member>.
         """
-        for existing_member in self.members:
+        for existing_member in self._members:
             if existing_member.id == member.id:
                 return True
 
@@ -358,6 +359,7 @@ class Group:
             shallow_copy.append(student)
 
         return shallow_copy
+
 
 class Grouping:
     """
@@ -439,7 +441,7 @@ class Grouping:
         for group in self._groups:
             groups_copy.append(group)
 
-        return True
+        return groups_copy
 
 
 if __name__ == '__main__':

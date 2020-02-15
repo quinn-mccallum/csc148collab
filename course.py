@@ -23,7 +23,7 @@ This file contains classes that describe a university course and the students
 who are enrolled in these courses.
 """
 from __future__ import annotations
-from typing import TYPE_CHECKING, List, Tuple, Optional
+from typing import TYPE_CHECKING, List, Tuple, Optional, Dict
 if TYPE_CHECKING:
     from survey import Answer, Survey, Question
 
@@ -53,20 +53,25 @@ class Student:
     === Public Attributes ===
     id: the id of the student
     name: the name of the student
+    _answers: a dictionary with question.id keys and Answer object values
 
     === Representation Invariants ===
     name is not the empty string
+    all answers are valid for the questions in _answers
     """
 
     id: int
     name: str
+    _answers: Dict[int, Answer]
+    # TODO: ask about storing Question object v. question id.
+    # TODO: 2 different question objects with same question id? what to do???
 
     def __init__(self, id_: int, name: str) -> None:
         """ Initialize a student with name <name> and id <id>
         Representation Invariant: name is not empty string"""
         self.id = id_
         self.name = name
-
+        self._answers = {}
 
     def __str__(self) -> str:
         """ Return the name of this student """
@@ -77,20 +82,28 @@ class Student:
         Return True iff this student has an answer for a question with the same
         id as <question> and that answer is a valid answer for <question>.
         """
-        # TODO: complete the body of this method
+        if question.id in self._answers:
+            if question.validate_answer(self._answers[question.id]):
+                return True
+        return False
 
     def set_answer(self, question: Question, answer: Answer) -> None:
         """
         Record this student's answer <answer> to the question <question>.
+        Do nothing if answer is not valid for this question.
         """
-        # TODO: complete the body of this method
+        # Validate answer for question
+        if question.validate_answer(answer):
+            self._answers[question.id] = answer
 
     def get_answer(self, question: Question) -> Optional[Answer]:
         """
         Return this student's answer to the question <question>. Return None if
         this student does not have an answer to <question>
         """
-        # TODO: complete the body of this method
+        if question.id in self._answers:
+            return self._answers[question.id]
+        return None
 
 
 class Course:
@@ -123,8 +136,6 @@ class Course:
         If adding any student would violate a representation invariant,
         do not add any of the students in <students> to the course.
         """
-        # TODO: What about aliasing...?
-        # TODO: Add testing for this: normal, duplicate, empty, ...
 
         # check representation invariants
         duplicate_students = False

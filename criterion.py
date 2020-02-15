@@ -83,7 +83,7 @@ class HomogeneousCriterion(Criterion):
         len(answers) > 0
         """
         # Single answer case
-        if len(answers == 1):
+        if len(answers) == 1:
             if answers[0].is_valid(question):
                 return 1.0
             else:
@@ -101,8 +101,8 @@ class HomogeneousCriterion(Criterion):
             for i2 in range(len(answers)):
                 if i1 != i2:
                     comparison_count += 1
-                    total_similarity += question.get_similarity(answers[1],
-                                                                answers[2])
+                    total_similarity += question.get_similarity(answers[0],
+                                                                answers[1])
         return total_similarity/ comparison_count
 
 
@@ -173,6 +173,8 @@ class LonelyMemberCriterion:
         for answer in unique_list:
             if answer not in answers_copy:
                 return False
+
+        # TODO Raise errors when necessary
 
         return True
 
