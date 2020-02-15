@@ -170,22 +170,20 @@ class Course:
 
         Hint: the sort_students function might be useful
         """
-        # ids = []
-        # tup = ()
-        #
-        # for student in self.students:
-        #     ids.append(student.id)
-        #
-        # ids.sort()
-        #
-        # for id in ids:
+        ids = []
+        tup = []
 
+        for student in self.students:
+            ids.append(student.id)
 
+        ids.sort()
 
+        for idd in ids:
+            for student in self.students:
+                if idd == student.id:
+                    tup.append(student)
 
-
-
-
+        return tuple(tup)
 
 
 if __name__ == '__main__':

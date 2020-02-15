@@ -53,12 +53,10 @@ def slice_list(lst: List[Any], n: int) -> List[List[Any]]:
     new_slice = []
     return_list = []
 
-
     while len(copy_lst) != 0:
         # Add first item from copy_lst to new_slice
         curr_element = copy_lst.pop(0)
         new_slice.append(curr_element)
-
 
         # If we have built up the temp slice to the correct length
         if len(new_slice) == n:
@@ -115,9 +113,6 @@ def windows(lst: List[Any], n: int) -> List[List[Any]]:
                     temp = []
 
     return new
-
-
-
 
 
 class Grouper:
@@ -429,8 +424,6 @@ class Grouping:
         # no problems, we can add the group
         self._groups.append(group)
         return True
-
-
 
     def get_groups(self) -> List[Group]:
         """ Return a list of all groups in this grouping.

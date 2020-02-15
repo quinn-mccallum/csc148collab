@@ -6,7 +6,6 @@
       <change beforePath="$PROJECT_DIR$/course.py" beforeDir="false" afterPath="$PROJECT_DIR$/course.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/criterion.py" beforeDir="false" afterPath="$PROJECT_DIR$/criterion.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/grouper.py" beforeDir="false" afterPath="$PROJECT_DIR$/grouper.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyta_report.html" beforeDir="false" afterPath="$PROJECT_DIR$/pyta_report.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/survey.py" beforeDir="false" afterPath="$PROJECT_DIR$/survey.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests.py" afterDir="false" />
     </list>
@@ -32,7 +31,7 @@
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="preferences.editor" />
   </component>
-  <component name="RunManager" selected="Python.example_tests">
+  <component name="RunManager" selected="Python.tests">
     <configuration name="course" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="a1" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -115,9 +114,6 @@
       <module name="a1" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -134,10 +130,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.tests" />
         <item itemvalue="Python.example_tests" />
+        <item itemvalue="Python.tests" />
         <item itemvalue="Python.example_tests" />
-        <item itemvalue="Python.example_tests" />
-        <item itemvalue="Python.survey" />
         <item itemvalue="Python.example_tests" />
       </list>
     </recent_temporary>

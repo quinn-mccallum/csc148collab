@@ -739,6 +739,36 @@ def test_windows() -> None:
 
 
 # def test_score_students() -> None:
+# #     q1 = YesNoQuestion(1, " ")
+# #     q2 = YesNoQuestion(2, " ")
+# #
+# #     a_true = Answer(True)
+# #     a_false = Answer(False)
+# #
+# #     person_1 = Student(1, "Albo")
+# #     person_2 = Student(2, "Bora")
+# #     person_3 = Student(3, "Cola")
+# #
+# #     person_1.set_answer(q1, a_true)
+# #     person_1.set_answer(q2, a_true)
+# #     person_2.set_answer(q1, a_true)
+# #     person_2.set_answer(q2, a_false)
+# #     person_3.set_answer(q1, a_true)
+# #     person_3.set_answer(q2, a_false)
+# #
+# #     q_list = [q1, q2]
+# #     my_survey = Survey(q_list)
+# #
+# #     my_survey.set_weight(2, q1)
+# #     my_survey.set_weight(3, q2)
+# #
+# #     criterion = HomogeneousCriterion()
+# #     q2_answers = [a_true, a_false, a_false]
+# #     similarity = criterion.score_answers(q2, q2_answers)
+# TODO: FINISH THIS TEST CASE FOR SCORE STUDENTS
+
+
+# def test_score_students_simple() -> None:
 #     q1 = NumericQuestion(1, "Pick num", 1, 5)
 #     q2 = YesNoQuestion(2, "T or F")
 #
@@ -754,59 +784,31 @@ def test_windows() -> None:
 #
 #     s_1.set_answer(q1, a_1)
 #     s_1.set_answer(q2, a_3)
+#
 #     s_2.set_answer(q1, a_1)
 #     s_2.set_answer(q2, a_3)
 #
 #     s_3.set_answer(q1, a_2)
 #     s_3.set_answer(q2, a_4)
+#
 #     s_4.set_answer(q1, a_2)
 #     s_4.set_answer(q2, a_4)
 #
-#     group_similar_a = Group([s_1, s_2])
-#     group_similar_b = Group([s_3, s_4])
-#     group_different_a = Group([s_1, s_3])
-#     group_different_b = Group([s_2, s_4])
-#     group_lonely = Group([s_1, s_2, s_3])
-#     group_everyone = Group(s_1, s_2, s_3, s_4)
-#
-#     q_list = [q1, q2, q3, q4]
+#     s_list = [s_1, s_2, s_3, s_4]
+#     q_list = [q1, q2]
 #     my_survey = Survey(q_list)
+#
+#     my_survey.score_students(s_list)
 
-    # score = my_survey.score_students(students_with_answers)
-    # assert round(score, 2) == 1.18
 
-
-def test_score_students_simple() -> None:
-    q1 = NumericQuestion(1, "Pick num", 1, 5)
-    q2 = YesNoQuestion(2, "T or F")
-
-    a_1 = Answer(1)
-    a_2 = Answer(5)
-    a_3 = Answer(True)
-    a_4 = Answer(False)
-
-    s_1 = Student(1, "Alphie")
-    s_2 = Student(2, "Alfons")
-    s_3 = Student(3, "Zori")
-    s_4 = Student(4, "Zoran")
-
-    s_1.set_answer(q1, a_1)
-    s_1.set_answer(q2, a_3)
-
-    s_2.set_answer(q1, a_1)
-    s_2.set_answer(q2, a_3)
-
-    s_3.set_answer(q1, a_2)
-    s_3.set_answer(q2, a_4)
-
-    s_4.set_answer(q1, a_2)
-    s_4.set_answer(q2, a_4)
-
-    s_list = [s_1, s_2, s_3, s_4]
-    q_list = [q1, q2]
-    my_survey = Survey(q_list)
-
-    my_survey.score_students(s_list)
+def test_course_get_students() -> None:
+    quinn = Student(22, 'Quinn')
+    tomasz = Student(2, 'Tomasz')
+    ellen = Student(14, "Ellen")
+    students = [quinn, tomasz, ellen]
+    csc148 = Course('csc148')
+    csc148.enroll_students(students)
+    assert csc148.get_students() == (tomasz, ellen, quinn)
 
 
 if __name__ == '__main__':

@@ -173,7 +173,7 @@ class NumericQuestion(MultipleChoiceQuestion):
 
     id: int
     text: str
-    _options: List(str)
+    _options: List[str]
 
     def __init__(self, id_: int, text: str, min_: int, max_: int) -> None:
         """
@@ -250,8 +250,7 @@ class YesNoQuestion(MultipleChoiceQuestion):
         """
         Initialize a question with the text <text> and id <id>.
         """
-        self.id = id_
-        self.text = text
+        MultipleChoiceQuestion.__init__(self, id_, text, ['True', 'False'])
 
     def __str__(self) -> str:
         """
@@ -263,7 +262,7 @@ class YesNoQuestion(MultipleChoiceQuestion):
         # possible answers
         p_a = "Opt 1: True, Opt 2: False"
 
-        return("Q[{}]: {}  {}".format(self.id, self.text, p_a))
+        return "Q[{}]: {}  {}".format(self.id, self.text, p_a)
 
     def validate_answer(self, answer: Answer) -> bool:
         """
@@ -564,37 +563,6 @@ class Survey:
         if len(self._questions) == 0:
             return 0
         # Check for InvalidAnswerError^^^...? how?
-
-        # scores = []
-        #
-        # # Get each question id in self._questions
-        # for qid in self._questions:
-        #     # Set the criterion & weight associated with each question
-        #     crit = self._get_criterion(self._questions[qid])
-        #     weight = self._get_weight(self._questions[qid])
-        #
-        #     # Empty list to store all the answers for the questions
-        #     # List resets to empty for each new question
-        #     answers = []
-        #
-        #     for student in students:
-        #         # Append each answer to question by each student to answers list
-        #         answers.append(student.get_answer(self._questions[qid]))
-        #
-        #     # Call the score_answers method of criterion w/ Question object and
-        #     # the list of answers. Multiply the score by the weight. Append the
-        #     # score to scores.
-        #     scores.append(
-        #         (crit.score_answers(self._questions[qid], answers)) * weight)
-        #
-        # # Get the average of the scores
-        # count = 0
-        # summ = 0
-        # for score in scores:
-        #     summ += score
-        #     count += 1
-        #
-        # return summ / count
 
         sum_scores = 0
         sum_weight = 0

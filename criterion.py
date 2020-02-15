@@ -101,9 +101,9 @@ class HomogeneousCriterion(Criterion):
             for i2 in range(len(answers)):
                 if i1 != i2:
                     comparison_count += 1
-                    total_similarity += question.get_similarity(answers[0],
-                                                                answers[1])
-        return total_similarity/ comparison_count
+                    total_similarity += question.get_similarity(answers[i1],
+                                                                answers[i2])
+        return total_similarity / comparison_count
 
 
 class HeterogeneousCriterion(HomogeneousCriterion):
