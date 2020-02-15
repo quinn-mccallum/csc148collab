@@ -32,7 +32,7 @@
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="preferences.editor" />
   </component>
-  <component name="RunManager" selected="Python.tests">
+  <component name="RunManager" selected="Python.example_tests">
     <configuration name="course" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="a1" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -46,6 +46,24 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/course.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="example_tests" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="a1" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/example_tests.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -79,9 +97,6 @@
       <module name="a1" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -119,11 +134,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.tests" />
-        <item itemvalue="Python.tests" />
-        <item itemvalue="Python.tests" />
-        <item itemvalue="Python.tests" />
-        <item itemvalue="Python.tests" />
+        <item itemvalue="Python.example_tests" />
+        <item itemvalue="Python.example_tests" />
+        <item itemvalue="Python.example_tests" />
+        <item itemvalue="Python.survey" />
+        <item itemvalue="Python.example_tests" />
       </list>
     </recent_temporary>
   </component>
@@ -157,9 +172,13 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="0" y="89" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1581699529992" />
-    <state x="374" y="284" key="com.intellij.ide.util.TipDialog" timestamp="1581790137646">
+    <state x="374" y="284" key="com.intellij.ide.util.TipDialog" timestamp="1581805477640">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="374" y="284" key="com.intellij.ide.util.TipDialog/0.0.1440.900@0.0.1440.900" timestamp="1581790137646" />
+    <state x="374" y="284" key="com.intellij.ide.util.TipDialog/0.0.1440.900@0.0.1440.900" timestamp="1581805477640" />
+    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1581798217971">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/0.0.1440.900@0.0.1440.900" timestamp="1581798217971" />
   </component>
 </project>

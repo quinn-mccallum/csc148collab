@@ -4,13 +4,14 @@ from survey import *
 from criterion import *
 from grouper import *
 
+
 # Step 2
 def test_student__str__() -> None:
     """Test student initializer and __str__ implementation"""
-    Tom = Student(0,"Thomas")
-    assert Tom.name == "Thomas"
-    assert Tom.id == 0
-    assert Tom.__str__() == "Thomas"
+    tom = Student(0,"Thomas")
+    assert tom.name == "Thomas"
+    assert tom.id == 0
+    assert tom.__str__() == "Thomas"
 
 
 def test_student_attributes() -> None:
@@ -20,13 +21,142 @@ def test_student_attributes() -> None:
     assert student.id == 1
 
 
-def test_student_str_method() -> None:
-    """Test the str method of Student"""
-    student = Student(2, 'Jill')
-    assert student.__str__() == 'Jill'
+#Student.has_answer()
+def test_student_has_answer_return_true() -> None:
+    """Test that the has_answer method returns True when the Student
+    has an Answer to the Question"""
+    student = Student(1, 'John')
+    q1 = MultipleChoiceQuestion(1, "a b c or d?", ['a', 'b', 'c', 'd'])
+    a1 = Answer('a')
+    q2 = CheckboxQuestion(5, "do you like dogs?", ['yes', 'no', 'sometimes'])
+    a2 = Answer(["yes", "sometimes"])
+    q3 = NumericQuestion(2, "Pick num", 1, 5)
+    a3 = Answer(3)
+    q4 = YesNoQuestion(4, "T or F")
+    a4 = Answer(True)
+    student.set_answer(q1, a1)
+    student.set_answer(q2, a2)
+    student.set_answer(q3, a3)
+    student.set_answer(q4, a4)
+    assert len(student._answers) == 4
+    assert student.has_answer(q1) is True
+    assert student.has_answer(q2) is True
+    assert student.has_answer(q3) is True
+    assert student.has_answer(q4) is True
 
-#Step 3
 
+def test_student_has_answer_return_false() -> None:
+    """ """
+    student = Student(1, 'John')
+    q1 = MultipleChoiceQuestion(1, "a b c or d?", ['a', 'b', 'c', 'd'])
+    a1 = Answer("z")
+    q2 = CheckboxQuestion(5, "do you like dogs?", ['yes', 'no', 'sometimes'])
+    a2 = Answer('yes')
+    q3 = NumericQuestion(2, "Pick num", 1, 5)
+    a3 = Answer(7)
+    q4 = YesNoQuestion(4, "T or F")
+    a4 = Answer("True")
+    student.set_answer(q1, a1)
+    student.set_answer(q2, a2)
+    student.set_answer(q3, a3)
+    student.set_answer(q4, a4)
+    assert len(student._answers) == 0
+    assert student.has_answer(q1) is False
+    assert student.has_answer(q2) is False
+    assert student.has_answer(q3) is False
+    assert student.has_answer(q4) is False
+
+
+# Student.set_answer()
+def test_student_set_answer_base_case() -> None:
+    """Test set_answer base case"""
+    student = Student(1, 'John')
+    q1 = MultipleChoiceQuestion(1, "a b c or d?", ['a', 'b', 'c', 'd'])
+    a1 = Answer('a')
+    q2 = CheckboxQuestion(5, "do you like dogs?", ['yes', 'no', 'sometimes'])
+    a2 = Answer(["yes", "sometimes"])
+    q3 = NumericQuestion(2, "Pick num", 1, 5)
+    a3 = Answer(3)
+    q4 = YesNoQuestion(4, "T or F")
+    a4 = Answer(True)
+    student.set_answer(q1, a1)
+    student.set_answer(q2, a2)
+    student.set_answer(q3, a3)
+    student.set_answer(q4, a4)
+    assert len(student._answers) == 4
+    assert student._answers[1] == a1
+    assert student._answers[5] == a2
+    assert student._answers[2] == a3
+    assert student._answers[4] == a4
+    assert student._answers[1].content == 'a'
+    assert student._answers[5].content == ["yes", "sometimes"]
+    assert student._answers[2].content == 3
+    assert student._answers[4].content == True
+
+
+def test_student_set_answer_not_valid() -> None:
+    """Test that set_answer does not record invalid answers """
+    student = Student(1, 'John')
+    q1 = MultipleChoiceQuestion(1, "a b c or d?", ['a', 'b', 'c', 'd'])
+    a1 = Answer('z')
+    q2 = CheckboxQuestion(5, "do you like dogs?", ['yes', 'no', 'sometimes'])
+    a2 = Answer('yes')
+    q3 = NumericQuestion(2, "Pick num", 1, 5)
+    a3 = Answer(7)
+    q4 = YesNoQuestion(4, "T or F")
+    a4 = Answer("True")
+    student.set_answer(q1, a1)
+    student.set_answer(q2, a2)
+    student.set_answer(q3, a3)
+    student.set_answer(q4, a4)
+    assert len(student._answers) == 0
+    assert student._answers == {}
+
+
+# Student.get_answer()
+def test_student_get_answer_valid() -> None:
+    student = Student(1, 'John')
+    q1 = MultipleChoiceQuestion(1, "a b c or d?", ['a', 'b', 'c', 'd'])
+    a1 = Answer('a')
+    q2 = CheckboxQuestion(5, "do you like dogs?", ['yes', 'no', 'sometimes'])
+    a2 = Answer(["yes", "sometimes"])
+    q3 = NumericQuestion(2, "Pick num", 1, 5)
+    a3 = Answer(3)
+    q4 = YesNoQuestion(4, "T or F")
+    a4 = Answer(True)
+    student.set_answer(q1, a1)
+    student.set_answer(q2, a2)
+    student.set_answer(q3, a3)
+    student.set_answer(q4, a4)
+    assert len(student._answers) == 4
+    assert student.get_answer(q1) == a1
+    assert student.get_answer(q2) == a2
+    assert student.get_answer(q3) == a3
+    assert student.get_answer(q4) == a4
+
+
+def test_student_get_answers_not_valid() -> None:
+    student = Student(1, 'John')
+    q1 = MultipleChoiceQuestion(1, "a b c or d?", ['a', 'b', 'c', 'd'])
+    a1 = Answer('z')
+    q2 = CheckboxQuestion(5, "do you like dogs?", ['yes', 'no', 'sometimes'])
+    a2 = Answer('yes')
+    q3 = NumericQuestion(2, "Pick num", 1, 5)
+    a3 = Answer(7)
+    q4 = YesNoQuestion(4, "T or F")
+    a4 = Answer("True")
+    student.set_answer(q1, a1)
+    student.set_answer(q2, a2)
+    student.set_answer(q3, a3)
+    student.set_answer(q4, a4)
+    assert len(student._answers) == 0
+    assert student.get_answer(q1) is None
+    assert student.get_answer(q2) is None
+    assert student.get_answer(q3) is None
+    assert student.get_answer(q4) is None
+
+
+# Step 3
 def test_course_attributes() -> None:
     """Test the public attributes of Course"""
     course = Course('csc148')
@@ -296,6 +426,7 @@ def test_hetero_crit() -> None:
     assert hetero_criterion.score_answers(my_question,
                                         opposite_answers) == 1
 
+
 def test_lonely_crit() -> None:
     """Test """
     my_question = NumericQuestion(1, "Pick a Number", 1, 5)
@@ -318,6 +449,164 @@ def test_lonely_crit() -> None:
                                           some_unique_answers) == 0
     assert lonely_criterion.score_answers(my_question,
                                           all_unique_answers) == 0
+
+
+def test_survey_init() -> None:
+    """Test initialization and basic properties of Survey"""
+    q1 = NumericQuestion(1, "Pick num", 1, 5)
+    q2 = MultipleChoiceQuestion(2, "Pick text", ["opt 1", "opt 2"])
+    q3 = CheckboxQuestion(3, "Pick multiple", ["a", "b", "c"])
+    q4 = YesNoQuestion(4, "T or F")
+    q_list = [q1, q2, q3, q4]
+
+    my_survey = Survey(q_list)
+
+    assert isinstance(my_survey._questions, Dict)
+    assert isinstance(my_survey._criteria, Dict)
+    assert isinstance(my_survey._weights, Dict)
+    assert isinstance(my_survey._default_criterion, HomogeneousCriterion)
+    assert my_survey._default_weight == 1
+
+    assert q1.id in my_survey._questions
+    assert q2.id in my_survey._questions
+    assert q3.id in my_survey._questions
+    assert q4.id in my_survey._questions
+
+
+def test_survey_len() -> None:
+    """Test Survey method __len__"""
+    q1 = NumericQuestion(1, "Pick num", 1, 5)
+    q2 = MultipleChoiceQuestion(2, "Pick text", ["opt 1", "opt 2"])
+    q3 = CheckboxQuestion(3, "Pick multiple", ["a", "b", "c"])
+    q4 = YesNoQuestion(4, "T or F")
+    q_list = [q1, q2, q3, q4]
+
+    my_survey = Survey(q_list)
+
+    assert len(my_survey) == 4
+
+
+def test_survey_str() -> None:
+    """Test Survey method __Str__"""
+    q1 = NumericQuestion(1, "Pick num", 1, 5)
+    q2 = MultipleChoiceQuestion(2, "Pick text", ["opt 1", "opt 2"])
+    q3 = CheckboxQuestion(3, "Pick multiple", ["a", "b", "c"])
+    q4 = YesNoQuestion(4, "T or F")
+    q_list = [q1, q2, q3, q4]
+
+    my_survey = Survey(q_list)
+    assert isinstance(str(my_survey), str)
+    assert str(my_survey)[0] == "Q"
+
+
+def test_survey_contains() -> None:
+    """Test Survey method contains"""
+    q1 = NumericQuestion(1, "Pick num", 1, 5)
+    q2 = MultipleChoiceQuestion(2, "Pick text", ["opt 1", "opt 2"])
+    q3 = CheckboxQuestion(3, "Pick multiple", ["a", "b", "c"])
+    q4 = YesNoQuestion(4, "T or F")
+    q_list = [q1, q2, q3]
+
+    my_survey = Survey(q_list)
+    assert my_survey.__contains__(q1)
+    assert not my_survey.__contains__(q4)
+
+
+def test_survey_get_questions() -> None:
+    """Test Survey method get_questions"""
+    q1 = NumericQuestion(1, "Pick num", 1, 5)
+    q2 = MultipleChoiceQuestion(2, "Pick text", ["opt 1", "opt 2"])
+    q3 = CheckboxQuestion(3, "Pick multiple", ["a", "b", "c"])
+    q4 = YesNoQuestion(4, "T or F")
+    q_list = [q1, q2, q3, q4]
+
+    my_survey = Survey(q_list)
+    survey_questions = my_survey.get_questions()
+    assert q_list == survey_questions
+
+
+def test_survey_set_get_criterion() -> None:
+    """Test Survey set and get criterion"""
+    q1 = NumericQuestion(1, "Pick num", 1, 5)
+    q2 = MultipleChoiceQuestion(2, "Pick text", ["opt 1", "opt 2"])
+    q3 = CheckboxQuestion(3, "Pick multiple", ["a", "b", "c"])
+    q4 = YesNoQuestion(4, "T or F")
+    q5 = YesNoQuestion(5, "T or F")
+
+    c_1 = HomogeneousCriterion()
+    c_2 = HeterogeneousCriterion
+    c_3 = LonelyMemberCriterion
+
+    q_list = [q1, q2, q3, q5]
+    my_survey = Survey(q_list)
+
+    # Test setting valid criterion
+    assert my_survey.set_criterion(c_1, q1)
+    assert my_survey.set_criterion(c_2, q2)
+    assert my_survey.set_criterion(c_3, q3)
+
+    # Test setting criterion to non existent question
+    assert not my_survey.set_criterion(c_1, q4)
+    assert not my_survey.set_criterion(c_2, q4)
+    assert not my_survey.set_criterion(c_3, q4)
+
+    # Test get criterion valid
+    assert my_survey._get_criterion(q1) == c_1
+    assert my_survey._get_criterion(q2) == c_2
+    assert my_survey._get_criterion(q3) == c_3
+
+    # Test get criterion on unset question
+    assert my_survey._get_criterion(q5) == my_survey._default_criterion
+
+
+def test_survey_set_get_weight() -> None:
+    """Test Survey set and get weight"""
+    q1 = NumericQuestion(1, "Pick num", 1, 5)
+    q2 = MultipleChoiceQuestion(2, "Pick text", ["opt 1", "opt 2"])
+    q3 = CheckboxQuestion(3, "Pick multiple", ["a", "b", "c"])
+    q4 = YesNoQuestion(4, "T or F")
+
+    w_1 = 2
+    w_2 = 3
+
+    q_list = [q1, q2, q3]
+    my_survey = Survey(q_list)
+
+    # Test setting valid weight
+    assert my_survey.set_weight(w_1, q1)
+    assert my_survey.set_weight(w_2, q2)
+
+    # Test setting weight to non existent question
+    assert not my_survey.set_weight(w_1, q4)
+    assert not my_survey.set_weight(w_2, q4)
+
+    # Test get weight valid
+    assert my_survey._get_weight(q1) == w_1
+    assert my_survey._get_weight(q2) == w_2
+
+    # Test get weight on unset question
+    assert my_survey._get_weight(q3) == my_survey._default_weight
+
+
+def test_Student_has_nonexistant() -> None:
+    """Test if student has a nonexistent entry"""
+    student = Student(1, 'John')
+
+    q1 = NumericQuestion(1, "Pick num", 1, 5)
+    q2 = MultipleChoiceQuestion(2, "Pick text", ["opt 1", "opt 2"])
+    q3 = CheckboxQuestion(3, "Pick multiple", ["a", "b", "c"])
+    q4 = YesNoQuestion(4, "T or F")
+
+    a1 = Answer(2)
+    a2 = Answer("opt 1")
+    a3 = Answer(["a", "b"])
+
+    student.set_answer(q1, a1)
+    student.set_answer(q2, a2)
+    student.set_answer(q3, a3)
+
+    assert not student.has_answer(q4)
+
 
 def test_group_contains_true() -> None:
     """Test the __contains__ method for class Group when member is
@@ -434,6 +723,90 @@ def test_get_groups_is_shallow() -> None:
     v.add_group(g1)
     v.add_group(g2)
     assert id(v._groups) != id(v.get_groups())
+
+
+def test_slice_list() -> None:
+    """Test the slice_list function"""
+    assert slice_list([3, 4, 6, 2, 3], 2) == [[3, 4], [6, 2], [3]]
+    assert slice_list(['a', 1, 6.0, False], 3) == [['a', 1, 6.0], [False]]
+    assert slice_list([], 1) == []
+
+def test_windows() -> None:
+    """Test the windows function"""
+    assert windows([3, 4, 6, 2, 3], 2) == [[3, 4], [4, 6], [6, 2], [2, 3]]
+    assert windows(['a', 1, 6.0, False], 3) == [['a', 1, 6.0], [1, 6.0, False]]
+    assert windows([], 1) == []
+
+
+# def test_score_students() -> None:
+#     q1 = NumericQuestion(1, "Pick num", 1, 5)
+#     q2 = YesNoQuestion(2, "T or F")
+#
+#     a_1 = Answer(1)
+#     a_2 = Answer(5)
+#     a_3 = Answer(True)
+#     a_4 = Answer(False)
+#
+#     s_1 = Student(1, "Alphie")
+#     s_2 = Student(2, "Alfons")
+#     s_3 = Student(3, "Zori")
+#     s_4 = Student(4, "Zoran")
+#
+#     s_1.set_answer(q1, a_1)
+#     s_1.set_answer(q2, a_3)
+#     s_2.set_answer(q1, a_1)
+#     s_2.set_answer(q2, a_3)
+#
+#     s_3.set_answer(q1, a_2)
+#     s_3.set_answer(q2, a_4)
+#     s_4.set_answer(q1, a_2)
+#     s_4.set_answer(q2, a_4)
+#
+#     group_similar_a = Group([s_1, s_2])
+#     group_similar_b = Group([s_3, s_4])
+#     group_different_a = Group([s_1, s_3])
+#     group_different_b = Group([s_2, s_4])
+#     group_lonely = Group([s_1, s_2, s_3])
+#     group_everyone = Group(s_1, s_2, s_3, s_4)
+#
+#     q_list = [q1, q2, q3, q4]
+#     my_survey = Survey(q_list)
+
+    # score = my_survey.score_students(students_with_answers)
+    # assert round(score, 2) == 1.18
+
+
+def test_score_students_simple() -> None:
+    q1 = NumericQuestion(1, "Pick num", 1, 5)
+    q2 = YesNoQuestion(2, "T or F")
+
+    a_1 = Answer(1)
+    a_2 = Answer(5)
+    a_3 = Answer(True)
+    a_4 = Answer(False)
+
+    s_1 = Student(1, "Alphie")
+    s_2 = Student(2, "Alfons")
+    s_3 = Student(3, "Zori")
+    s_4 = Student(4, "Zoran")
+
+    s_1.set_answer(q1, a_1)
+    s_1.set_answer(q2, a_3)
+
+    s_2.set_answer(q1, a_1)
+    s_2.set_answer(q2, a_3)
+
+    s_3.set_answer(q1, a_2)
+    s_3.set_answer(q2, a_4)
+
+    s_4.set_answer(q1, a_2)
+    s_4.set_answer(q2, a_4)
+
+    s_list = [s_1, s_2, s_3, s_4]
+    q_list = [q1, q2]
+    my_survey = Survey(q_list)
+
+    my_survey.score_students(s_list)
 
 
 if __name__ == '__main__':

@@ -53,9 +53,12 @@ def slice_list(lst: List[Any], n: int) -> List[List[Any]]:
     new_slice = []
     return_list = []
 
-    for _ in copy_lst:
+
+    while len(copy_lst) != 0:
         # Add first item from copy_lst to new_slice
-        new_slice.append(copy_lst.pop(0))
+        curr_element = copy_lst.pop(0)
+        new_slice.append(curr_element)
+
 
         # If we have built up the temp slice to the correct length
         if len(new_slice) == n:
@@ -69,9 +72,6 @@ def slice_list(lst: List[Any], n: int) -> List[List[Any]]:
         return_list.append(new_slice)
 
     return return_list
-
-
-
 
 
 def windows(lst: List[Any], n: int) -> List[List[Any]]:
