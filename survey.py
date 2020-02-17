@@ -609,7 +609,22 @@ class Survey:
         All students in the groups in <grouping> have an answer to all questions
             in this survey
         """
-        # TODO: complete the body of this method
+        # Get groups from grouping
+        groups_to_score = grouping.get_groups()
+        num_groups = len(groups_to_score)
+        total_score = 0
+
+        # If grouping comes back empty
+        if num_groups == 0:
+            return 0.0
+
+        # for each group
+        for group_to_score in groups_to_score:
+            students_to_score = group_to_score.get_members()
+            total_score += self.score_students(students_to_score)
+
+        average_score = total_score / num_groups
+        return average_score
 
 
 if __name__ == '__main__':

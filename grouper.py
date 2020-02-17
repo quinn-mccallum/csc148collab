@@ -174,7 +174,20 @@ class AlphaGrouper(Grouper):
 
         Hint: the sort_students function might be useful
         """
-        # TODO: complete the body of this method
+        students_in_course_copy = course.students[:]
+        students_sorted_alpha = sort_students(students_in_course_copy, "name")
+        students_grouped = slice_list(students_sorted_alpha, self.group_size)
+        students_group_objs = []
+        grouping = Grouping()
+
+        for group in students_grouped:
+            g = Group(group)
+            students_group_objs.append(g)
+
+        for group in students_group_objs:
+            grouping.add_group(group)
+
+        return grouping
 
 
 class RandomGrouper(Grouper):
@@ -202,7 +215,17 @@ class RandomGrouper(Grouper):
         members if that is required to make sure all students in <course> are
         members of a group.
         """
-        # TODO: complete the body of this method
+        return_grouping = Grouping()
+
+        students = list(course.get_students())
+        random.shuffle(students)
+        sliced_groups = slice_list(students, self.group_size)
+
+        for random_group in sliced_groups:
+            new_group = Group(random_group)
+            return_grouping.add_group(new_group)
+
+        return return_grouping
 
 
 class GreedyGrouper(Grouper):
@@ -244,7 +267,78 @@ class GreedyGrouper(Grouper):
         The final group created may have fewer than N members if that is
         required to make sure all students in <course> are members of a group.
         """
-        # TODO: complete the body of this method
+        # assuming list is sorted by id as per get_students() docstring
+        students_from_course = course.get_students()
+
+        return_grouping = Grouping()
+        temp_list = []
+        num_students = len(students_from_course)
+
+        for i in range(num_students):
+            student = students_from_course[i]
+
+            # If the group is long enough to add
+            if len(temp_list) == self.group_size:
+                group_to_add = Group(temp_list)
+                return_grouping.add_group(group_to_add)
+                temp_list = []
+
+            # elif i >= num_students - 2:
+            #     temp_list.append(student)
+
+            else:
+                best_score = 0
+                best_student = student
+
+                for j in range(i + 1, num_students):
+                    examined_student = students_from_course[j]
+                    potential_score = survey.score_students(temp_list +
+                                                            [examined_student])
+                    if potential_score > best_score:
+                        best_student = examined_student
+                        best_score = potential_score
+
+                temp_list.append(best_student)
+
+        if len(temp_list) != 0:
+            group_to_add = Group(temp_list)
+            return_grouping.add_group(group_to_add)
+
+        return return_grouping
+
+
+        # assuming list is sorted by id as per get_students() docstring
+        # students_from_course = list(course.get_students())
+        # groups = []
+        # potential_group = []
+        # students_group_objs = []
+        # grouping = Grouping()
+        #
+        # for student in students_from_course:
+        #     score = 0.0
+        #     if len(potential_group) == 0:
+        #         potential_group.append(students_from_course.pop(0))
+        #     elif len(potential_group) == self.group_size:
+        #         groups.append(potential_group)
+        #         potential_group = []
+        #     else:
+        #         potential_score = \
+        #             survey.score_students(potential_group + [student])
+        #         if potential_score > score:
+        #             score = potential_score
+        #             potential_member = student
+        #
+        #         # potential_group.append(potential_member)
+        #         # students_from_course.remove(potential_member)
+        #
+        # for group in groups:
+        #     g = Group(group)
+        #     students_group_objs.append(g)
+        #
+        # for group in students_group_objs:
+        #     grouping.add_group(group)
+        #
+        # return grouping
 
 
 class WindowGrouper(Grouper):
@@ -394,7 +488,7 @@ class Grouping:
             # If this isn't the first line, add a new line character
             if i != 0:
                 return_str += "\n"
-            return_str += group
+            return_str += group # TODO: getting error on this line cannot concat str to "Group"
 
         return return_str
 

@@ -159,7 +159,14 @@ class Course:
         Return True iff all the students enrolled in this course have a valid
         answer for every question in <survey>.
         """
-        # TODO: complete the body of this method
+        questions = survey.get_questions()
+        for student in self.students:
+            for question in questions:
+                answer = student.get_answer(question)
+                if not answer.is_valid(question):
+                    return False
+
+        return True
 
     def get_students(self) -> Tuple[Student, ...]:
         """

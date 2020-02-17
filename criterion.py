@@ -34,6 +34,7 @@ class InvalidAnswerError(Exception):
     """
     # TODO add something here?
 
+
 class Criterion:
     """
     An abstract class representing a criterion used to evaluate the quality of
@@ -135,6 +136,7 @@ class HeterogeneousCriterion(HomogeneousCriterion):
         similarity = HomogeneousCriterion.score_answers(self, question, answers)
         return 1 - similarity
 
+
 class LonelyMemberCriterion:
     # TODO: make this a child class of another class defined in this file
     """ A criterion used to measure the quality of a group of students
@@ -161,21 +163,22 @@ class LonelyMemberCriterion:
         === Precondition ===
         len(answers) > 0
         """
-        unique_list = []
-        answers_copy = answers[:]
+
+        # TODO check for invalid answer
+
+        answer_count = {}
+
         for answer in answers:
-            if answer not in unique_list:
-                answers_copy.remove(answer)
-                unique_list.append(answer)
+            if answer not in answer_count:
+                answer_count[answer] = 1
+            else:
+                answer_count[answer] += 1
 
-        for answer in unique_list:
-            if answer not in answers_copy:
-                return False
+        for answer in answer_count:
+            if answer_count[answer] == 1:
+                return 0.0
 
-        # TODO Raise errors when necessary
-
-        return True
-
+        return 1.0
 
 
 if __name__ == '__main__':
