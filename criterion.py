@@ -163,27 +163,27 @@ class LonelyMemberCriterion:
         len(answers) > 0
         """
 
-        # TODO check for invalid answer
+        # TODO get new code
 
         answer_count = {}
 
-        # ONLY one answer in answer list == unique?? check piazza
         if len(answers) == 1:
             if not answers[0].is_valid(question):
                 raise InvalidAnswerError
             else:
                 return 0.0
 
-        for answer in answers:
-            if not answer.is_valid(question):
+        for answer_obj in answers:
+            if not answer_obj.is_valid(question):
                 raise InvalidAnswerError
-            elif answer not in answer_count:
-                answer_count[answer] = 1
-            else:
-                answer_count[answer] += 1
 
-        for answer in answer_count:
-            if answer_count[answer] == 1:
+            if answer_obj.content not in answer_count:
+                answer_count[answer_obj.content] = 1
+            else:
+                answer_count[answer_obj.content] += 1
+
+        for answer_key in answer_count:
+            if answer_count[answer_key] == 1:
                 return 0.0
 
         return 1.0

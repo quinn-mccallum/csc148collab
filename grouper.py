@@ -267,78 +267,39 @@ class GreedyGrouper(Grouper):
         The final group created may have fewer than N members if that is
         required to make sure all students in <course> are members of a group.
         """
-        # assuming list is sorted by id as per get_students() docstring
-        students_from_course = course.get_students()
+        all_students = list(course.get_students())
+        final_grouping = Grouping()
+        grouped_students = []
 
-        return_grouping = Grouping()
-        temp_list = []
-        num_students = len(students_from_course)
+        # need to check if empty
 
-        for i in range(num_students):
-            student = students_from_course[i]
+        while len(all_students) != 0:
+            student = all_students.pop(0)
 
-            # If the group is long enough to add
-            if len(temp_list) == self.group_size:
-                group_to_add = Group(temp_list)
-                return_grouping.add_group(group_to_add)
-                temp_list = []
+            if len(grouped_students) == self.group_size:
+                group_to_add = Group(grouped_students)
+                final_grouping.add_group(group_to_add)
+                grouped_students = []
 
-            if len(temp_list) == 0:
-                temp_list.append(student)
+            grouped_students.append(student)
+            best_score = -1
+            best_student = student
 
-            else:
-                best_score = 0
-                best_student = student
+            for partner in all_students:
+                potential_score = survey.score_students(grouped_students +
+                                                        [partner])
+                if potential_score > best_score:
+                    best_student = partner
+                    best_score = potential_score
 
-                for j in range(i, num_students):
-                    examined_student = students_from_course[j]
-                    potential_score = survey.score_students(temp_list +
-                                                            [examined_student])
-                    if potential_score > best_score:
-                        best_student = examined_student
-                        best_score = potential_score
+            grouped_students.append(best_student)
+            all_students.remove(best_student)
 
-                temp_list.append(best_student)
+        if len(grouped_students) != 0:
+            group_to_add = Group(grouped_students)
+            final_grouping.add_group(group_to_add)
 
-        if len(temp_list) != 0:
-            group_to_add = Group(temp_list)
-            return_grouping.add_group(group_to_add)
-
-        return return_grouping
-
-
-        # assuming list is sorted by id as per get_students() docstring
-        # students_from_course = list(course.get_students())
-        # groups = []
-        # potential_group = []
-        # students_group_objs = []
-        # grouping = Grouping()
-        #
-        # for student in students_from_course:
-        #     score = 0.0
-        #     if len(potential_group) == 0:
-        #         potential_group.append(students_from_course.pop(0))
-        #     elif len(potential_group) == self.group_size:
-        #         groups.append(potential_group)
-        #         potential_group = []
-        #     else:
-        #         potential_score = \
-        #             survey.score_students(potential_group + [student])
-        #         if potential_score > score:
-        #             score = potential_score
-        #             potential_member = student
-        #
-        #         # potential_group.append(potential_member)
-        #         # students_from_course.remove(potential_member)
-        #
-        # for group in groups:
-        #     g = Group(group)
-        #     students_group_objs.append(g)
-        #
-        # for group in students_group_objs:
-        #     grouping.add_group(group)
-        #
-        # return grouping
+        return final_grouping
 
 
 class WindowGrouper(Grouper):
@@ -383,7 +344,42 @@ class WindowGrouper(Grouper):
         after repeating steps 1 and 2 above, put the remaining students into a
         new group.
         """
-        # TODO: complete the body of this method
+        all_students = list(course.get_students())
+        final_grouping = Grouping()
+
+        window_groups = windows(all_students, self.group_size)
+
+        # i = 0
+        # while len(window_groups) != 1:
+        #     for i in range(len(window_groups)):
+        #         current =
+
+        i = 0
+        while len(window_groups) != 1:
+            current = window_groups[i]
+            next_ = window_groups[i + 1]
+            current_score = survey.score_students(current)
+            next_score = survey.score_students(next_)
+            if current_score > next_score:
+                g = Group(window_groups[0])
+                final_grouping.add_group(g)
+                for i in range(self.group_size - 1, -1, -1):
+                    all_students.pop(i)
+                i += 1
+            else:
+
+                g = Group(window_groups[1])
+                final_grouping.add_group(g)
+                for i in range(self.group_size, 0, -1):
+                    all_students.pop(i)
+
+            window_groups = windows(all_students, self.group_size)
+
+        if len(window_groups) == 1:
+            g = Group(window_groups[0])
+            final_grouping.add_group(g)
+
+        return final_grouping
 
 
 class Group:
@@ -484,11 +480,14 @@ class Grouping:
 
         i = 0
         for group in self._groups:
-
             # If this isn't the first line, add a new line character
             if i != 0:
                 return_str += "\n"
-            return_str += str(group) # TODO: getting error on this line cannot concat str to "Group"
+
+            g = group.get_members()
+            for member in g:
+                return_str += member.name + ". " #TODO make prettier
+                i += 1
 
         return return_str
 
