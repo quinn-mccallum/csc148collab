@@ -53,7 +53,6 @@ class Question:
         self.id = id_
         self.text = text
 
-
     def __str__(self) -> str:
         """
         Return a string representation of this question that contains both
@@ -533,8 +532,8 @@ class Survey:
         If <question>.id does not occur in this survey, do not set the <weight>
         and return False instead.
         """
-        if question.id not in self._questions:
-            return False
+        if question.id not in self._questions:  # AttributeError: 'int' object
+            return False                        # has no attribute 'id'
         else:
             self._criteria[question.id] = criterion
             return True
@@ -561,37 +560,41 @@ class Survey:
             survey
         """
         if len(self._questions) == 0:
-            return 0
-        # Check for InvalidAnswerError^^^...? how?
+            return 0.0
 
-        sum_scores = 0
-        # num_students = len(students)
-        num_questions = len(self._questions)
+        try:
 
-        # Get each question id in self._questions
-        for qid in self._questions:
+            sum_scores = 0
+            # num_students = len(students)
+            num_questions = len(self._questions)
 
-            # Set the criterion & weight associated with each question
-            crit = self._get_criterion(self._questions[qid])
-            weight = self._get_weight(self._questions[qid])
+            # Get each question id in self._questions
+            for qid in self._questions:
 
-            # Empty list to store all the answers for the questions
-            # List resets to empty for each new question
-            answers = []
+                # Set the criterion & weight associated with each question
+                crit = self._get_criterion(self._questions[qid])
+                weight = self._get_weight(self._questions[qid])
 
-            for student in students:
-                # Append each answer to question by each student to answers list
-                answers.append(student.get_answer(self._questions[qid]))
+                # Empty list to store all the answers for the questions
+                # List resets to empty for each new question
+                answers = []
 
-            # Call the score_answers method of criterion w/ Question object and
-            # the list of answers. Multiply the score by the weight. Append the
-            # score to scores.
+                for student in students:
+                    # Append each answer to question by each student to answers list
+                    answers.append(student.get_answer(self._questions[qid]))
 
-            this_score = crit.score_answers(self._questions[qid], answers)
-            sum_scores += this_score * weight
+                # Call the score_answers method of criterion w/ Question object and
+                # the list of answers. Multiply the score by the weight. Append the
+                # score to scores.
 
-            # Get the average of the scores
-        return sum_scores / num_questions
+                this_score = crit.score_answers(self._questions[qid], answers)
+                sum_scores += this_score * weight
+
+                # Get the average of the scores
+            return sum_scores / num_questions
+
+        except InvalidAnswerError:
+            return 0.0
 
     def score_grouping(self, grouping: Grouping) -> float:
         """ Return a score for <grouping> calculated based on the answers of
@@ -613,7 +616,6 @@ class Survey:
         groups_to_score = grouping.get_groups()
         num_groups = len(groups_to_score)
         total_score = 0
-        # count = 0
 
         # If grouping comes back empty
         if len(groups_to_score) == 0:
@@ -623,8 +625,6 @@ class Survey:
         for group_to_score in groups_to_score:
             students_to_score = group_to_score.get_members()
             total_score += self.score_students(students_to_score)
-            # for _ in students_to_score:
-            #     count += 1
 
         average_score = total_score / num_groups
         return average_score

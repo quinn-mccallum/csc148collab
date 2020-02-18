@@ -98,21 +98,24 @@ def windows(lst: List[Any], n: int) -> List[List[Any]]:
         for j in range(i, i + n):
 
             # check if j is in range of lst so we don't error out
-            if j in range(len(lst)):
-
+            if j not in range(len(lst)):
+                continue
                 # append the lst item at j to a temporary list <temp>
-                temp.append(lst[j])
+            temp.append(lst[j])
 
-                # if temp contains <n> items
-                if len(temp) == n:
+            # if temp contains <n> items
+            if len(temp) == n:
 
-                    # append the temporary (inner) list to the main list <new>
-                    new.append(temp)
+                # append the temporary (inner) list to the main list <new>
+                new.append(temp)
 
-                    # reset temp to empty
-                    temp = []
+                # reset temp to empty
+                temp = []
 
     return new
+
+# capped_limit = min(i=n, len(list))
+# range(i, capped_limit)
 
 
 class Grouper:
@@ -352,12 +355,12 @@ class WindowGrouper(Grouper):
             my_windows = windows(all_students, self.group_size)
 
             index_found = -1
-            for i in range(len(my_windows)-1):
-                if index_found == -1:
-                    score_i = survey.score_students(my_windows[i])
-                    score_j = survey.score_students(my_windows[i + 1])
-                    if score_i >= score_j:
-                        index_found = i
+            i = 0
+            while i in range(len(my_windows) - 1) and index_found == -1:
+                score_i = survey.score_students(my_windows[i])
+                score_j = survey.score_students(my_windows[i + 1])
+                if score_i >= score_j:
+                    index_found = i
 
             if index_found == -1:
                 group_to_add = Group(my_windows[-1])
@@ -386,8 +389,10 @@ class Group:
     _members: List[Student]
 
     def __init__(self, members: List[Student]) -> None:
-        """ Initialize a group with members <members> """
-        # TODO Check for duplicates
+        """ Initialize a group with members <members>
+        Precondition: No duplicate student ids in <members>
+        """
+
         self._members = []
         self._members.extend(members)
 
@@ -466,19 +471,24 @@ class Grouping:
 
         You can choose the precise format of this string.
         """
-        return_str = ""
+        return_str = "Groups: "
 
         i = 0
         for group in self._groups:
             # If this isn't the first line, add a new line character
             if i != 0:
-                return_str += "\n"
+                return_str += ", "
+
+            return_str += "["
 
             g = group.get_members()
             for member in g:
-                return_str += member.name + ". " #TODO make prettier
+                return_str += member.name + ", "
                 i += 1
 
+            return_str += "]"
+
+        return_str += "."
         return return_str
 
     def add_group(self, group: Group) -> bool:

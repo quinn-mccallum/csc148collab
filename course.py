@@ -125,6 +125,7 @@ class Course:
     def __init__(self, name: str) -> None:
         """
         Initialize a course with the name of <name>.
+        precondition = name is not an empty string
         """
         self.name = name
         self.students = []
@@ -163,6 +164,8 @@ class Course:
         for student in self.students:
             for question in questions:
                 answer = student.get_answer(question)
+                if answer is None:
+                    return False
                 if not answer.is_valid(question):
                     return False
 

@@ -32,7 +32,8 @@ class InvalidAnswerError(Exception):
     """
     Error that should be raised when an answer is invalid for a given question.
     """
-    # TODO add something here?
+    def __str__(self) -> str:
+        return 'Invalid answer detected'
 
 
 class Criterion:
@@ -92,7 +93,7 @@ class HomogeneousCriterion(Criterion):
 
         # Check if any answers are not valid
         for answer in answers:
-            if not answer.is_valid(question):
+            if answer is None or not answer.is_valid(question):
                 raise InvalidAnswerError
 
         # Multiple answers case
@@ -104,6 +105,7 @@ class HomogeneousCriterion(Criterion):
                 total_similarity += question.get_similarity(answers[i],
                                                             answers[j])
         return total_similarity / comparison_count
+
 
 
 class HeterogeneousCriterion(HomogeneousCriterion):
@@ -162,9 +164,6 @@ class LonelyMemberCriterion:
         === Precondition ===
         len(answers) > 0
         """
-
-        # TODO get new code
-
         answer_count = {}
 
         if len(answers) == 1:
@@ -174,7 +173,7 @@ class LonelyMemberCriterion:
                 return 0.0
 
         for answer_obj in answers:
-            if not answer_obj.is_valid(question):
+            if answer_obj is None or not answer_obj.is_valid(question):
                 raise InvalidAnswerError
 
             if answer_obj.content not in answer_count:
