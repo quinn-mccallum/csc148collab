@@ -565,7 +565,8 @@ class Survey:
         # Check for InvalidAnswerError^^^...? how?
 
         sum_scores = 0
-        num_students = len(students)
+        # num_students = len(students)
+        num_questions = len(self._questions)
 
         # Get each question id in self._questions
         for qid in self._questions:
@@ -590,7 +591,7 @@ class Survey:
             sum_scores += this_score * weight
 
             # Get the average of the scores
-        return sum_scores / num_students
+        return sum_scores / num_questions
 
     def score_grouping(self, grouping: Grouping) -> float:
         """ Return a score for <grouping> calculated based on the answers of
@@ -612,15 +613,18 @@ class Survey:
         groups_to_score = grouping.get_groups()
         num_groups = len(groups_to_score)
         total_score = 0
+        # count = 0
 
         # If grouping comes back empty
-        if num_groups == 0:
+        if len(groups_to_score) == 0:
             return 0.0
 
         # for each group
         for group_to_score in groups_to_score:
             students_to_score = group_to_score.get_members()
             total_score += self.score_students(students_to_score)
+            # for _ in students_to_score:
+            #     count += 1
 
         average_score = total_score / num_groups
         return average_score

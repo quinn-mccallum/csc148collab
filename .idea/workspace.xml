@@ -3,8 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="adf5296a-812e-4796-8814-215993a77707" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/criterion.py" beforeDir="false" afterPath="$PROJECT_DIR$/criterion.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/grouper.py" beforeDir="false" afterPath="$PROJECT_DIR$/grouper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/survey.py" beforeDir="false" afterPath="$PROJECT_DIR$/survey.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -29,7 +29,7 @@
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="project.propDebugger" />
   </component>
-  <component name="RunManager" selected="Python.example_tests">
+  <component name="RunManager" selected="Python.tests">
     <configuration name="course" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="a1" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -128,8 +128,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.example_tests" />
-        <item itemvalue="Python.example_tests" />
+        <item itemvalue="Python.tests" />
+        <item itemvalue="Python.tests" />
         <item itemvalue="Python.example_tests" />
         <item itemvalue="Python.example_tests" />
         <item itemvalue="Python.example_tests" />
@@ -166,38 +166,38 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1581983016027" />
-    <state width="1419" height="562" key="GridCell.Tab.0.bottom" timestamp="1581987409233">
+    <state width="1419" height="562" key="GridCell.Tab.0.bottom" timestamp="1581999458659">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="562" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1581987409233" />
-    <state width="1419" height="562" key="GridCell.Tab.0.center" timestamp="1581987409232">
+    <state width="1419" height="562" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1581999458659" />
+    <state width="1419" height="562" key="GridCell.Tab.0.center" timestamp="1581999458658">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="562" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1581987409232" />
-    <state width="1419" height="562" key="GridCell.Tab.0.left" timestamp="1581987409231">
+    <state width="1419" height="562" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1581999458658" />
+    <state width="1419" height="562" key="GridCell.Tab.0.left" timestamp="1581999458657">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="562" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1581987409231" />
-    <state width="1419" height="562" key="GridCell.Tab.0.right" timestamp="1581987409232">
+    <state width="1419" height="562" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1581999458657" />
+    <state width="1419" height="562" key="GridCell.Tab.0.right" timestamp="1581999458658">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="562" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1581987409232" />
-    <state width="1419" height="562" key="GridCell.Tab.1.bottom" timestamp="1581987409234">
+    <state width="1419" height="562" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1581999458658" />
+    <state width="1419" height="562" key="GridCell.Tab.1.bottom" timestamp="1581999458661">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="562" key="GridCell.Tab.1.bottom/0.0.1440.900@0.0.1440.900" timestamp="1581987409234" />
-    <state width="1419" height="562" key="GridCell.Tab.1.center" timestamp="1581987409233">
+    <state width="1419" height="562" key="GridCell.Tab.1.bottom/0.0.1440.900@0.0.1440.900" timestamp="1581999458661" />
+    <state width="1419" height="562" key="GridCell.Tab.1.center" timestamp="1581999458660">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="562" key="GridCell.Tab.1.center/0.0.1440.900@0.0.1440.900" timestamp="1581987409233" />
-    <state width="1419" height="562" key="GridCell.Tab.1.left" timestamp="1581987409233">
+    <state width="1419" height="562" key="GridCell.Tab.1.center/0.0.1440.900@0.0.1440.900" timestamp="1581999458660" />
+    <state width="1419" height="562" key="GridCell.Tab.1.left" timestamp="1581999458659">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="562" key="GridCell.Tab.1.left/0.0.1440.900@0.0.1440.900" timestamp="1581987409233" />
-    <state width="1419" height="562" key="GridCell.Tab.1.right" timestamp="1581987409234">
+    <state width="1419" height="562" key="GridCell.Tab.1.left/0.0.1440.900@0.0.1440.900" timestamp="1581999458659" />
+    <state width="1419" height="562" key="GridCell.Tab.1.right" timestamp="1581999458660">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="562" key="GridCell.Tab.1.right/0.0.1440.900@0.0.1440.900" timestamp="1581987409234" />
+    <state width="1419" height="562" key="GridCell.Tab.1.right/0.0.1440.900@0.0.1440.900" timestamp="1581999458660" />
     <state x="179" y="57" key="SettingsEditor" timestamp="1581982119625">
       <screen x="0" y="0" width="1440" height="900" />
     </state>

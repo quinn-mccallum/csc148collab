@@ -764,27 +764,27 @@ class TestGrouper:
         g.group_size = 4
         assert g.group_size == 4
 
-    def test_window_grouper(self) -> None:
-        """Test """
-        quinn = Student(22, 'Quinn')
-        tomasz = Student(2, 'Tomasz')
-        ellen = Student(14, "Ellen")
-        julia = Student(3, 'Julia')
-        doria = Student(7, "Doria")
-        vanessa = Student(12, 'Vanessa')
-        students = [quinn, tomasz, ellen, julia, doria, vanessa]
-        csc148 = Course('csc148')
-        csc148.enroll_students(students)
-
-        q1 = MultipleChoiceQuestion(1, "a b c or d?", ['a', 'b', 'c', 'd'])
-        q2 = CheckboxQuestion(5, "do you like dogs?", ['yes', 'no', 'sometimes'])
-        q3 = NumericQuestion(2, "Pick num", 1, 5)
-        q4 = YesNoQuestion(4, "T or F")
-        q_list = [q1, q2, q3, q4]
-        s = Survey(q_list)
-
-        win = WindowGrouper(3)
-        win.make_grouping(csc148, s)
+    # def test_window_grouper(self) -> None:
+    #     """Test """
+    #     quinn = Student(22, 'Quinn')
+    #     tomasz = Student(2, 'Tomasz')
+    #     ellen = Student(14, "Ellen")
+    #     julia = Student(3, 'Julia')
+    #     doria = Student(7, "Doria")
+    #     vanessa = Student(12, 'Vanessa')
+    #     students = [quinn, tomasz, ellen, julia, doria, vanessa]
+    #     csc148 = Course('csc148')
+    #     csc148.enroll_students(students)
+    #
+    #     q1 = MultipleChoiceQuestion(1, "a b c or d?", ['a', 'b', 'c', 'd'])
+    #     q2 = CheckboxQuestion(5, "do you like dogs?", ['yes', 'no', 'sometimes'])
+    #     q3 = NumericQuestion(2, "Pick num", 1, 5)
+    #     q4 = YesNoQuestion(4, "T or F")
+    #     q_list = [q1, q2, q3, q4]
+    #     s = Survey(q_list)
+    #
+    #     win = WindowGrouper(3)
+    #     win.make_grouping(csc148, s)
 
 
     # def test_alpha_make_grouping(self) -> None:

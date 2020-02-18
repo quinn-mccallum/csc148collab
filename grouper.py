@@ -344,40 +344,30 @@ class WindowGrouper(Grouper):
         after repeating steps 1 and 2 above, put the remaining students into a
         new group.
         """
+        # assuming list is sorted by id as per get_students() docstring
         all_students = list(course.get_students())
         final_grouping = Grouping()
 
-        window_groups = windows(all_students, self.group_size)
+        while len(all_students) != 0:
+            my_windows = windows(all_students, self.group_size)
 
-        # i = 0
-        # while len(window_groups) != 1:
-        #     for i in range(len(window_groups)):
-        #         current =
+            index_found = -1
+            for i in range(len(my_windows)-1):
+                if index_found == -1:
+                    score_i = survey.score_students(my_windows[i])
+                    score_j = survey.score_students(my_windows[i + 1])
+                    if score_i >= score_j:
+                        index_found = i
 
-        i = 0
-        while len(window_groups) != 1:
-            current = window_groups[i]
-            next_ = window_groups[i + 1]
-            current_score = survey.score_students(current)
-            next_score = survey.score_students(next_)
-            if current_score > next_score:
-                g = Group(window_groups[0])
-                final_grouping.add_group(g)
-                for i in range(self.group_size - 1, -1, -1):
-                    all_students.pop(i)
-                i += 1
+            if index_found == -1:
+                group_to_add = Group(my_windows[-1])
+                final_grouping.add_group(group_to_add)
             else:
+                group_to_add = Group(my_windows[0])
+                final_grouping.add_group(group_to_add)
 
-                g = Group(window_groups[1])
-                final_grouping.add_group(g)
-                for i in range(self.group_size, 0, -1):
-                    all_students.pop(i)
-
-            window_groups = windows(all_students, self.group_size)
-
-        if len(window_groups) == 1:
-            g = Group(window_groups[0])
-            final_grouping.add_group(g)
+            for student in group_to_add.get_members():
+                all_students.remove(student)
 
         return final_grouping
 
