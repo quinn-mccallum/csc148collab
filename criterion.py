@@ -98,12 +98,11 @@ class HomogeneousCriterion(Criterion):
         # Multiple answers case
         comparison_count = 0
         total_similarity = 0
-        for i1 in range(len(answers)):
-            for i2 in range(len(answers)):
-                if i1 != i2:
-                    comparison_count += 1
-                    total_similarity += question.get_similarity(answers[i1],
-                                                                answers[i2])
+        for i in range(len(answers)):
+            for j in range(i + 1, len(answers)):
+                comparison_count += 1
+                total_similarity += question.get_similarity(answers[i],
+                                                            answers[j])
         return total_similarity / comparison_count
 
 
@@ -168,8 +167,17 @@ class LonelyMemberCriterion:
 
         answer_count = {}
 
+        # ONLY one answer in answer list == unique?? check piazza
+        if len(answers) == 1:
+            if not answers[0].is_valid(question):
+                raise InvalidAnswerError
+            else:
+                return 0.0
+
         for answer in answers:
-            if answer not in answer_count:
+            if not answer.is_valid(question):
+                raise InvalidAnswerError
+            elif answer not in answer_count:
                 answer_count[answer] = 1
             else:
                 answer_count[answer] += 1

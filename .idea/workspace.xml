@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="adf5296a-812e-4796-8814-215993a77707" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/course.py" beforeDir="false" afterPath="$PROJECT_DIR$/course.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/criterion.py" beforeDir="false" afterPath="$PROJECT_DIR$/criterion.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/grouper.py" beforeDir="false" afterPath="$PROJECT_DIR$/grouper.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pyta_report.html" beforeDir="false" afterPath="$PROJECT_DIR$/pyta_report.html" afterDir="false" />
@@ -30,9 +29,9 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="preferences.editor" />
+    <property name="settings.editor.selected.configurable" value="project.propDebugger" />
   </component>
-  <component name="RunManager" selected="Python.tests">
+  <component name="RunManager" selected="Python.example_tests">
     <configuration name="course" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="a1" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -131,11 +130,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.tests" />
-        <item itemvalue="Python.tests" />
         <item itemvalue="Python.example_tests" />
         <item itemvalue="Python.example_tests" />
+        <item itemvalue="Python.example_tests" />
         <item itemvalue="Python.tests" />
+        <item itemvalue="Python.example_tests" />
       </list>
     </recent_temporary>
   </component>
@@ -165,42 +164,46 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1419" height="303" key="GridCell.Tab.0.bottom" timestamp="1581975487278">
+    <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1581983016027">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="303" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1581975487278" />
-    <state width="1419" height="303" key="GridCell.Tab.0.center" timestamp="1581975487277">
+    <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1581983016027" />
+    <state width="1419" height="303" key="GridCell.Tab.0.bottom" timestamp="1581982269067">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="303" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1581975487277" />
-    <state width="1419" height="303" key="GridCell.Tab.0.left" timestamp="1581975487276">
+    <state width="1419" height="303" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1581982269067" />
+    <state width="1419" height="303" key="GridCell.Tab.0.center" timestamp="1581982269066">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="303" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1581975487276" />
-    <state width="1419" height="303" key="GridCell.Tab.0.right" timestamp="1581975487278">
+    <state width="1419" height="303" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1581982269066" />
+    <state width="1419" height="303" key="GridCell.Tab.0.left" timestamp="1581982269064">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="303" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1581975487278" />
-    <state width="1419" height="303" key="GridCell.Tab.1.bottom" timestamp="1581975487281">
+    <state width="1419" height="303" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1581982269064" />
+    <state width="1419" height="303" key="GridCell.Tab.0.right" timestamp="1581982269066">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="303" key="GridCell.Tab.1.bottom/0.0.1440.900@0.0.1440.900" timestamp="1581975487281" />
-    <state width="1419" height="303" key="GridCell.Tab.1.center" timestamp="1581975487280">
+    <state width="1419" height="303" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1581982269066" />
+    <state width="1419" height="303" key="GridCell.Tab.1.bottom" timestamp="1581982269069">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="303" key="GridCell.Tab.1.center/0.0.1440.900@0.0.1440.900" timestamp="1581975487280" />
-    <state width="1419" height="303" key="GridCell.Tab.1.left" timestamp="1581975487279">
+    <state width="1419" height="303" key="GridCell.Tab.1.bottom/0.0.1440.900@0.0.1440.900" timestamp="1581982269069" />
+    <state width="1419" height="303" key="GridCell.Tab.1.center" timestamp="1581982269068">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="303" key="GridCell.Tab.1.left/0.0.1440.900@0.0.1440.900" timestamp="1581975487279" />
-    <state width="1419" height="303" key="GridCell.Tab.1.right" timestamp="1581975487281">
+    <state width="1419" height="303" key="GridCell.Tab.1.center/0.0.1440.900@0.0.1440.900" timestamp="1581982269068" />
+    <state width="1419" height="303" key="GridCell.Tab.1.left" timestamp="1581982269067">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="303" key="GridCell.Tab.1.right/0.0.1440.900@0.0.1440.900" timestamp="1581975487281" />
-    <state x="0" y="89" key="SettingsEditor" timestamp="1581699529992">
+    <state width="1419" height="303" key="GridCell.Tab.1.left/0.0.1440.900@0.0.1440.900" timestamp="1581982269067" />
+    <state width="1419" height="303" key="GridCell.Tab.1.right" timestamp="1581982269068">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="0" y="89" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1581699529992" />
+    <state width="1419" height="303" key="GridCell.Tab.1.right/0.0.1440.900@0.0.1440.900" timestamp="1581982269068" />
+    <state x="179" y="57" key="SettingsEditor" timestamp="1581982119625">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="179" y="57" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1581982119625" />
     <state x="374" y="284" key="com.intellij.ide.util.TipDialog" timestamp="1581963496141">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -209,21 +212,5 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/0.0.1440.900@0.0.1440.900" timestamp="1581798217971" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/example_tests.py</url>
-          <line>229</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/grouper.py</url>
-          <line>273</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

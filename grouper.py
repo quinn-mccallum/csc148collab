@@ -283,14 +283,14 @@ class GreedyGrouper(Grouper):
                 return_grouping.add_group(group_to_add)
                 temp_list = []
 
-            # elif i >= num_students - 2:
-            #     temp_list.append(student)
+            if len(temp_list) == 0:
+                temp_list.append(student)
 
             else:
                 best_score = 0
                 best_student = student
 
-                for j in range(i + 1, num_students):
+                for j in range(i, num_students):
                     examined_student = students_from_course[j]
                     potential_score = survey.score_students(temp_list +
                                                             [examined_student])
@@ -488,7 +488,7 @@ class Grouping:
             # If this isn't the first line, add a new line character
             if i != 0:
                 return_str += "\n"
-            return_str += group # TODO: getting error on this line cannot concat str to "Group"
+            return_str += str(group) # TODO: getting error on this line cannot concat str to "Group"
 
         return return_str
 

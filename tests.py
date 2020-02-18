@@ -151,22 +151,22 @@ class TestStudent:
 
     def test_Student_has_nonexistant(self) -> None:
         """Test if student has a nonexistent entry"""
-    student = Student(1, 'John')
+        student = Student(1, 'John')
 
-    q1 = NumericQuestion(1, "Pick num", 1, 5)
-    q2 = MultipleChoiceQuestion(2, "Pick text", ["opt 1", "opt 2"])
-    q3 = CheckboxQuestion(3, "Pick multiple", ["a", "b", "c"])
-    q4 = YesNoQuestion(4, "T or F")
+        q1 = NumericQuestion(1, "Pick num", 1, 5)
+        q2 = MultipleChoiceQuestion(2, "Pick text", ["opt 1", "opt 2"])
+        q3 = CheckboxQuestion(3, "Pick multiple", ["a", "b", "c"])
+        q4 = YesNoQuestion(4, "T or F")
 
-    a1 = Answer(2)
-    a2 = Answer("opt 1")
-    a3 = Answer(["a", "b"])
+        a1 = Answer(2)
+        a2 = Answer("opt 1")
+        a3 = Answer(["a", "b"])
 
-    student.set_answer(q1, a1)
-    student.set_answer(q2, a2)
-    student.set_answer(q3, a3)
+        student.set_answer(q1, a1)
+        student.set_answer(q2, a2)
+        student.set_answer(q3, a3)
 
-    assert not student.has_answer(q4)
+        assert not student.has_answer(q4)
 
 
 # Step 3

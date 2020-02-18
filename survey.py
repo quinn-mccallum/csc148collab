@@ -208,7 +208,7 @@ class NumericQuestion(MultipleChoiceQuestion):
 
         1. first find the absolute difference between <answer1>.content and
            <answer2>.content.
-        2. divide the value from step 1 by the difference between the maximimum
+        2. divide the value from step 1 by the difference between the maximum
            and minimum possible answers.
         3. subtract the value from step 2 from 1.0
 
@@ -565,7 +565,7 @@ class Survey:
         # Check for InvalidAnswerError^^^...? how?
 
         sum_scores = 0
-        sum_weight = 0
+        num_students = len(students)
 
         # Get each question id in self._questions
         for qid in self._questions:
@@ -588,10 +588,9 @@ class Survey:
 
             this_score = crit.score_answers(self._questions[qid], answers)
             sum_scores += this_score * weight
-            sum_weight += 1
 
             # Get the average of the scores
-        return sum_scores / sum_weight
+        return sum_scores / num_students
 
     def score_grouping(self, grouping: Grouping) -> float:
         """ Return a score for <grouping> calculated based on the answers of
