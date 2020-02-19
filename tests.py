@@ -1224,7 +1224,6 @@ class TestWindowGrouper:
         assert len(f[0].get_members()) == 2
         assert len(f[1].get_members()) == 2
 
-
     def test_random_grouper(self) -> None:
         """Test random grouper"""
         question_list = [NumericQuestion(1, "Pick num", 1, 5),

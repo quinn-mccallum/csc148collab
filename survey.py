@@ -580,13 +580,13 @@ class Survey:
                 answers = []
 
                 for student in students:
-                    # Append each answer to question by each student to answers list
+                    # Append each answer to question by each student to answers
+                    # list
                     answers.append(student.get_answer(self._questions[qid]))
 
-                # Call the score_answers method of criterion w/ Question object and
-                # the list of answers. Multiply the score by the weight. Append the
-                # score to scores.
-
+                # Call the score_answers method of criterion w/ Question object
+                # and the list of answers. Multiply the score by the weight.
+                # Append the score to scores.
                 this_score = crit.score_answers(self._questions[qid], answers)
                 sum_scores += this_score * weight
 

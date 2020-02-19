@@ -107,7 +107,6 @@ class HomogeneousCriterion(Criterion):
         return total_similarity / comparison_count
 
 
-
 class HeterogeneousCriterion(HomogeneousCriterion):
     # TODO: make this a child class of another class defined in this file
     """ A criterion used to evaluate the quality of a group based on the group
@@ -169,8 +168,7 @@ class LonelyMemberCriterion:
         if len(answers) == 1:
             if not answers[0].is_valid(question):
                 raise InvalidAnswerError
-            else:
-                return 0.0
+            return 0.0
 
         for answer_obj in answers:
             if answer_obj is None or not answer_obj.is_valid(question):

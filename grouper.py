@@ -30,7 +30,8 @@ from typing import TYPE_CHECKING, List, Any
 from course import sort_students
 if TYPE_CHECKING:
     from survey import Survey
-    from course import Course, Student
+    from course import Course, Student  # TODO pyta says imports from package
+                                        # TODO are not grouped?!
 
 
 def slice_list(lst: List[Any], n: int) -> List[List[Any]]:
@@ -471,13 +472,13 @@ class Grouping:
 
         You can choose the precise format of this string.
         """
-        return_str = "Groups: "
+        return_str = "Groups: "  # TODO pyta says this line is redundant
 
         i = 0
         for group in self._groups:
             # If this isn't the first line, add a new line character
             if i != 0:
-                return_str += ", "
+                return_str += "\n"
 
             return_str += "["
 
@@ -503,16 +504,15 @@ class Grouping:
         if len(group) == 0:
             return False
 
-        # Make sure no duplicate students
-        # for every possible student to be added
+        existing_list = []
+        for existing_group in self._groups:
+            for existing_student in existing_group.get_members():
+                existing_list.append(existing_student)
+
         for potential_student in group.get_members():
-            # for every current group
-            for existing_group in self._groups:
-                # for every student in the given current group
-                for existing_student in existing_group.get_members():
-                    # if the students have the same id
-                    if potential_student.id == existing_student.id:
-                        return False
+            for student in existing_list:
+                if potential_student.id == student.id:
+                    return False
 
         # no problems, we can add the group
         self._groups.append(group)
