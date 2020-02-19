@@ -27,11 +27,9 @@ well as a grouping (a group of groups).
 from __future__ import annotations
 import random
 from typing import TYPE_CHECKING, List, Any
-from course import sort_students
+from course import Course, Student, sort_students
 if TYPE_CHECKING:
     from survey import Survey
-    from course import Course, Student  # TODO pyta says imports from package
-                                        # TODO are not grouped?!
 
 
 def slice_list(lst: List[Any], n: int) -> List[List[Any]]:
@@ -472,7 +470,7 @@ class Grouping:
 
         You can choose the precise format of this string.
         """
-        return_str = "Groups: "  # TODO pyta says this line is redundant
+        return_str = "Groups: "
 
         i = 0
         for group in self._groups:
@@ -489,8 +487,7 @@ class Grouping:
 
             return_str += "]"
 
-        return_str += "."
-        return return_str
+        return return_str + '.'
 
     def add_group(self, group: Group) -> bool:
         """

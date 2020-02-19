@@ -7,7 +7,6 @@
       <change beforePath="$PROJECT_DIR$/grouper.py" beforeDir="false" afterPath="$PROJECT_DIR$/grouper.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pyta_report.html" beforeDir="false" afterPath="$PROJECT_DIR$/pyta_report.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/survey.py" beforeDir="false" afterPath="$PROJECT_DIR$/survey.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,7 +30,7 @@
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="project.propDebugger" />
   </component>
-  <component name="RunManager" selected="Python.tests">
+  <component name="RunManager" selected="Python.course">
     <configuration name="course" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="a1" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -68,24 +67,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="example_tests" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="a1" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/example_tests.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="true" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="example_usage" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="a1" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -104,7 +85,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="tests" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="grouper" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="a1" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -113,7 +94,25 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tests.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/grouper.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="survey" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="a1" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/survey.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -124,11 +123,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.tests" />
-        <item itemvalue="Python.example_usage" />
-        <item itemvalue="Python.example_tests" />
-        <item itemvalue="Python.criterion" />
         <item itemvalue="Python.course" />
+        <item itemvalue="Python.criterion" />
+        <item itemvalue="Python.survey" />
+        <item itemvalue="Python.grouper" />
+        <item itemvalue="Python.example_usage" />
       </list>
     </recent_temporary>
   </component>
@@ -162,38 +161,38 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1581983016027" />
-    <state width="1419" height="382" key="GridCell.Tab.0.bottom" timestamp="1582067837907">
+    <state width="1419" height="382" key="GridCell.Tab.0.bottom" timestamp="1582074253527">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="382" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1582067837907" />
-    <state width="1419" height="382" key="GridCell.Tab.0.center" timestamp="1582067837906">
+    <state width="1419" height="382" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1582074253527" />
+    <state width="1419" height="382" key="GridCell.Tab.0.center" timestamp="1582074253526">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="382" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1582067837906" />
-    <state width="1419" height="382" key="GridCell.Tab.0.left" timestamp="1582067837905">
+    <state width="1419" height="382" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1582074253526" />
+    <state width="1419" height="382" key="GridCell.Tab.0.left" timestamp="1582074253525">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="382" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1582067837905" />
-    <state width="1419" height="382" key="GridCell.Tab.0.right" timestamp="1582067837906">
+    <state width="1419" height="382" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1582074253525" />
+    <state width="1419" height="382" key="GridCell.Tab.0.right" timestamp="1582074253526">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="382" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1582067837906" />
-    <state width="1419" height="382" key="GridCell.Tab.1.bottom" timestamp="1582067837909">
+    <state width="1419" height="382" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1582074253526" />
+    <state width="1419" height="382" key="GridCell.Tab.1.bottom" timestamp="1582074253529">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="382" key="GridCell.Tab.1.bottom/0.0.1440.900@0.0.1440.900" timestamp="1582067837909" />
-    <state width="1419" height="382" key="GridCell.Tab.1.center" timestamp="1582067837908">
+    <state width="1419" height="382" key="GridCell.Tab.1.bottom/0.0.1440.900@0.0.1440.900" timestamp="1582074253529" />
+    <state width="1419" height="382" key="GridCell.Tab.1.center" timestamp="1582074253528">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="382" key="GridCell.Tab.1.center/0.0.1440.900@0.0.1440.900" timestamp="1582067837908" />
-    <state width="1419" height="382" key="GridCell.Tab.1.left" timestamp="1582067837907">
+    <state width="1419" height="382" key="GridCell.Tab.1.center/0.0.1440.900@0.0.1440.900" timestamp="1582074253528" />
+    <state width="1419" height="382" key="GridCell.Tab.1.left" timestamp="1582074253527">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="382" key="GridCell.Tab.1.left/0.0.1440.900@0.0.1440.900" timestamp="1582067837907" />
-    <state width="1419" height="382" key="GridCell.Tab.1.right" timestamp="1582067837909">
+    <state width="1419" height="382" key="GridCell.Tab.1.left/0.0.1440.900@0.0.1440.900" timestamp="1582074253527" />
+    <state width="1419" height="382" key="GridCell.Tab.1.right" timestamp="1582074253528">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="382" key="GridCell.Tab.1.right/0.0.1440.900@0.0.1440.900" timestamp="1582067837909" />
+    <state width="1419" height="382" key="GridCell.Tab.1.right/0.0.1440.900@0.0.1440.900" timestamp="1582074253528" />
     <state x="179" y="57" key="SettingsEditor" timestamp="1581982119625">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -210,5 +209,16 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/0.0.1440.900@0.0.1440.900" timestamp="1581798217971" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/grouper.py</url>
+          <line>524</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

@@ -379,7 +379,6 @@ class Answer:
         """Initialize an answer with content <content>
         new_answer = Answer("Apple")
         new_answer = Answer(True)
-
         """
         # TODO: this seemed too easy
         self.content = content
@@ -563,7 +562,6 @@ class Survey:
             return 0.0
 
         try:
-
             sum_scores = 0
             # num_students = len(students)
             num_questions = len(self._questions)
